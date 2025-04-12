@@ -1,0 +1,5 @@
+估计方法,英文,需要已知条件1,需要已知条件2
+最小二乘,least square,NA,NA
+最小均方误差,minimum mean square,相关参数的一阶矩,相关参数的二阶矩
+最大似然,maximum likelihood,似然函数,NA
+最大后验,maximum a posteriori,似然函数,待估计参数的先验 PDF

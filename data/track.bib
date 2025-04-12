@@ -1,0 +1,138 @@
+@article{bar-shalomEffectCommonProcess1986,
+  title = {The {{Effect}} of the {{Common Process Noise}} on the {{Two-Sensor Fused-Track Covariance}}},
+  author = {{Bar-Shalom}, Yaakov and Campo, Leon},
+  year = {1986},
+  month = nov,
+  journal = {IEEE Transactions on Aerospace and Electronic Systems},
+  volume = {AES-22},
+  number = {6},
+  pages = {803--805},
+  issn = {1557-9603},
+  doi = {10.1109/TAES.1986.310815},
+  urldate = {2024-03-25},
+  abstract = {This note deals with the effect of the common process noise on the fusion (combination) of the state estimates of a target based on measurements obtained by two different sensors. This problem arises in a multisensor environment where each sensor has its information processing (tracking) subsystem. In the case of an {$\alpha$}-{\ss} tracking filter the effect of the process noise is that, over a wide range of its variance, the uncertainty area corresponding to the fused estimates is about 70 percent of the single-sensor uncertainty area as opposed to 50 percent obtained if the dependence is ignored.},
+  keywords = {Covariance matrix,Equations,Filters,Information processing,Noise measurement,Sensor fusion,Sensor systems,Steady-state,Target tracking,Working environment noise}
+}
+
+@book{bar-shalomEstimationApplicationsTracking2001,
+  title = {Estimation with {{Applications}} to {{Tracking}} and {{Navigation}}: {{Theory Algorithms}} and {{Software}}},
+  author = {{Bar-Shalom}, Yaakov and Li, X Rong and Kirubarajan, Thiagalingam},
+  year = {2001},
+  publisher = {John Wiley \& Sons},
+  isbn = {0-471-41655-X}
+}
+
+@book{bar-shalomTrackingDataAssociation1987,
+  title = {Tracking and {{Data Association}}},
+  author = {Bar-Shalom, Yaakov and Fortmann, Thomas E and Cable, Peter G},
+  year = {1987},
+  publisher = {Academic Press Professional}
+}
+
+@inproceedings{blomEfficientFilterAbruptly1984,
+  title = {An {{Efficient Filter}} for {{Abruptly Changing Systems}}},
+  booktitle = {The 23rd {{IEEE Conference}} on {{Decision}} and {{Control}}},
+  author = {Blom, Henricus Albertus Petrus},
+  year = {1984},
+  pages = {656--658},
+  publisher = {IEEE}
+}
+
+@article{blomInteractingMultipleModel1988,
+  title = {The {{Interacting Multiple Model Algorithm}} for {{Systems}} with {{Markovian Switching Coefficients}}},
+  author = {Blom, Henk AP and {Bar-Shalom}, Yaakov},
+  year = {1988},
+  journal = {IEEE transactions on Automatic Control},
+  volume = {33},
+  number = {8},
+  pages = {780--783},
+  issn = {0018-9286},
+  doi = {10.1109/9.1299}
+}
+
+@article{changOptimalTracktoTrackFusion1997,
+  title = {On {{Optimal Track-to-Track Fusion}}},
+  author = {Chang, K.C. and Saha, R.K. and {Bar-Shalom}, Y.},
+  year = {1997},
+  month = oct,
+  journal = {IEEE Transactions on Aerospace and Electronic Systems},
+  volume = {33},
+  number = {4},
+  pages = {1271--1276},
+  issn = {1557-9603},
+  doi = {10.1109/7.625124},
+  urldate = {2024-03-25},
+  abstract = {Track-to-track fusion is an important part in multisensor fusion. Much research has been done in this area. Chong et al. (1979, 1986, 1990) among others, presented an optimal fusion formula under an arbitrary communication pattern. This formula is optimal when the underlying systems are deterministic, i.e., the process noise is zero, or when full-rate communication (two sensors exchange information each time they receive new measurements) is employed. However, in practice, the process noise is not negligible due to target maneuvering and sensors typically communicate infrequently to save communication bandwidth. In such situations, the measurements from two sensors are not conditionally (given the previous target state) independent due to the common process noise from the underlying system, and the fusion formula becomes an approximate one. This dependence phenomena was also observed by Bar-Shalom (1981) where a formula was derived to compute the cross-covariance of two track estimates obtained by different sensors. Based on this results a fusion formula was subsequently derived (1986) to combine the local estimates which took into account the dependency between the two estimates. Unfortunately, the Bayesian derivation made an assumption that is not met. This work points out the implicit approximation made and shows that the result turns out to be optimal only in the ML (maximum likelihood) sense. A performance evaluation technique is then proposed to study the performance of various track-to-track fusion techniques. The results provide performance bounds of different techniques under various operating conditions which can be used in designing a fusion system.},
+  keywords = {Bandwidth,Bayesian methods,Maximum likelihood estimation,Noise measurement,Sensor phenomena and characterization,Sensor systems,Systems engineering and theory,Target tracking,Testing,Time measurement}
+}
+
+@book{giordanonicholasjComputationalPhysics2006,
+  title = {Computational {{Physics}}},
+  author = {{Giordano, Nicholas J} and Nakanishi, Hisao},
+  year = {2006},
+  publisher = {Pearson/Prentice Hall},
+  isbn = {0-13-146990-8}
+}
+
+@inproceedings{julierNewExtensionKalman1997,
+  title = {New {{Extension}} of the {{Kalman Filter}} to {{Nonlinear Systems}}},
+  booktitle = {Signal {{Processing}}, {{Sensor Fusion}}, and {{Target Recognition VI}}},
+  author = {Julier, Simon J. and Uhlmann, Jeffrey K.},
+  year = {1997},
+  month = jul,
+  volume = {3068},
+  pages = {182--193},
+  publisher = {SPIE},
+  doi = {10.1117/12.280797},
+  urldate = {2024-03-24},
+  abstract = {The Kalman Filter (KF) is one of the most widely used methods for tracking and estimation due to its simplicity, optimality, tractability and robustness. However, the application of the KF to nonlinear systems can be difficult. The most common approach is to use the Extended Kalman Filter (EKF) which simply linearizes all nonlinear models so that the traditional linear Kalman filter can be applied. Although the EKF (in its many forms) is a widely used filtering strategy, over thirty years of experience with it has led to a general consensus within the tracking and control community that it is difficult to implement, difficult to tune, and only reliable for systems which are almost linear on the time scale of the update intervals. In this paper a new linear estimator is developed and demonstrated. Using the principle that a set of discretely sampled points can be used to parameterize mean and covariance, the estimator yields performance equivalent to the KF for linear systems yet generalizes elegantly to nonlinear systems without the linearization steps required by the EKF. We show analytically that the expected performance of the new approach is superior to that of the EKF and, in fact, is directly comparable to that of the second order Gauss filter. The method is not restricted to assuming that the distributions of noise sources are Gaussian. We argue that the ease of implementation and more accurate estimation features of the new filter recommend its use over the EKF in virtually all applications.}
+}
+
+@article{julierNewMethodNonlinear2000,
+  title = {A {{New Method}} for the {{Nonlinear Transformation}} of {{Means}} and {{Covariances}} in {{Filters}} and {{Estimators}}},
+  author = {Julier, Simon and Uhlmann, Jeffrey and {Durrant-Whyte}, Hugh F},
+  year = {2000},
+  journal = {IEEE Transactions on automatic control},
+  volume = {45},
+  number = {3},
+  pages = {477--482},
+  publisher = {IEEE},
+  issn = {0018-9286},
+  doi = {10.1109/9.847726}
+}
+
+@inproceedings{julierScaledUnscentedTransformation2002,
+  title = {The {{Scaled Unscented Transformation}}},
+  booktitle = {Proceedings of the 2002 {{American Control Conference}} ({{IEEE Cat}}. {{No}}. {{CH37301}})},
+  author = {Julier, Simon J},
+  year = {2002},
+  volume = {6},
+  pages = {4555--4559},
+  publisher = {IEEE},
+  isbn = {0-7803-7298-0}
+}
+
+@phdthesis{phaneufApproximateNonlinearEstimation1968,
+  title = {Approximate {{Nonlinear Estimation}}},
+  author = {Phaneuf, Roger Joseph},
+  year = {1968},
+  school = {Massachusetts Institute of Technology},
+  keywords = {⛔ No DOI found}
+}
+
+@book{vandermerweSigmaPointKalmanFilters2004,
+  title = {Sigma-{{Point Kalman Filters}} for {{Probabilistic Inference}} in {{Dynamic State-Space Models}}},
+  author = {Van Der Merwe, Rudolph},
+  year = {2004},
+  publisher = {Oregon Health \& Science University},
+  isbn = {0-496-76423-3}
+}
+
+@book{zarchanProgressAstronauticsAeronautics2005a,
+  title = {Progress in {{Astronautics}} and {{Aeronautics}}: {{Fundamentals}} of {{Kalman Filtering}}: {{A Practical Approach}}},
+  author = {Zarchan, Paul},
+  year = {2005},
+  volume = {208},
+  publisher = {Aiaa},
+  isbn = {1-60086-458-9}
+}
