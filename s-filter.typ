@@ -1,5 +1,5 @@
-#import "@local/qslide:0.1.0": *
-#show: qslide.with(
+#import "@local/touying-quick:0.1.0": *
+#show: touying-quick.with(
   title: "常增益滤波",
   subtilte: "Kalman 滤波系列课程第1讲",
   author: "主讲：杨鑫斌",

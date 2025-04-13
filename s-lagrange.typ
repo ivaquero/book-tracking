@@ -268,8 +268,8 @@ $
 )
 ||||||| 9cf44cf
 =======
-#import "@local/qslide:0.1.0": *
-#show: qslide.with(
+#import "@local/touying-quick:0.1.0": *
+#show: touying-quick.with(
   title: "拉格朗日插值在羊群追踪中的应用",
   subtilte: "目标跟踪系列课程第1讲",
   author: "主讲：杨鑫斌",
