@@ -1,0 +1,11 @@
+缩写,全称,中文释义,知识板块
+TAS,Track and Search,先跟踪后搜索（对准目标）,雷达工作模式
+TWS,Track While Search,边搜索边跟踪（周期扫描）,雷达工作模式
+PSR,Primary Surveillance Radar,一次监视雷达,雷达点迹来源
+IFF,Identification Friend or Foe,敌我识别,雷达点迹来源
+SSR,Secondary Surveillance Radar,二次监视雷达,雷达点迹来源
+BITE,Built-In Test Equipment,机内自检设备,雷达数据处理流程
+DTE,Data Termial Equipment,数据终端设备,雷达数据处理流程
+DBF,Digital Beamforming,数字波束形成,雷达数据处理流程
+DSP,Digital Signal Processing,数字信号处理,雷达数据处理流程
+SATCAT,Satellite Catalog,卫星目录号,雷达数据处理流程

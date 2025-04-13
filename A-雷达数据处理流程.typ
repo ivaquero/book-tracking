@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-#import "@local/scibook:0.1.0": *
-#show: doc => conf(
-||||||| 9cf44cf
-#import "lib/scibook.typ": *
-#show: doc => conf(
-=======
 #import "@local/qooklet:0.1.0": *
 #show: qooklet.with(
->>>>>>> fa5790de72ff5f3d54d572f1f713992b86ae0d18
   title: "雷达数据处理流程",
   author: "Yāng Xīnbīn",
   footer-cap: "Yāng Xīnbīn",
@@ -516,24 +508,9 @@
 == 生词表
 <生词表>
 
+#let data = csv("data/term-radar.csv")
 #figure(
-<<<<<<< HEAD
-  xlsx-parser(
-    read("data/term-radar.xlsx", encoding: none),
-    parse-table-style: false,
-    parse-stroke: false,
-    stroke: frame(rgb("000")),
-  ),
-||||||| 9cf44cf
   ktable(data, 4),
-=======
-  xlsx-parser(
-    read("data/term-radar.xlsx", encoding: none),
-    parse-table-style: false,
-    parse-stroke: false,
-    stroke: three-line(rgb("000")),
-  ),
->>>>>>> fa5790de72ff5f3d54d572f1f713992b86ae0d18
   caption: "生词表",
   supplement: "表",
   kind: table,

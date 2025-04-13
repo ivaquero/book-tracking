@@ -1,12 +1,12 @@
-#import "@local/scislide:0.1.0": *
-#show: doc => conf(
+#import "@local/touying-quick:0.1.0": *
+#show: touying-quick.with(
   title: "常增益滤波",
   subtilte: "Kalman 滤波系列课程第1讲",
   author: "主讲：杨鑫斌",
   author-size: 20pt,
-  footer: "Kalman 滤波系列课程",
   institute: "能源与智能工程学院",
-  doc,
+  footer: "Henan University of Animal Husbandry and Economy",
+  lang: "zh",
 )
 
 = 铺垫与术语

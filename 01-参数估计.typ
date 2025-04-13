@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-#import "@local/scibook:0.1.0": *
-#show: doc => conf(
-||||||| 9cf44cf
-#import "lib/scibook.typ": *
-#show: doc => conf(
-=======
 #import "@local/qooklet:0.1.0": *
 #show: qooklet.with(
->>>>>>> fa5790de72ff5f3d54d572f1f713992b86ae0d18
   title: "参数估计",
   author: "Yāng Xīnbīn",
   footer-cap: "Yāng Xīnbīn",
@@ -19,7 +11,7 @@
 
 按照估计所采用的准则，参数估计包括 4 种基本估计，即最大后验估计（MAPE）、最大似然估计（MLE）、最小均方误差估计（MMSE）和最小二乘估计（LSE）。前两者属于基于概率视角，后两者基于优化视角。其使用的先决条件各不相同，具体如下表所示
 
-#let param = csv("data/param_estm.csv")
+#let param = csv("data/term-estmation.csv")
 #figure(
   ktable(param, 4),
   caption: "基本估计方法",

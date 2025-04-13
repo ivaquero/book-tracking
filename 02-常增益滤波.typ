@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-#import "@local/scibook:0.1.0": *
-#show: doc => conf(
-||||||| 9cf44cf
-#import "lib/scibook.typ": *
-#show: doc => conf(
-=======
 #import "@local/qooklet:0.1.0": *
 #show: qooklet.with(
->>>>>>> fa5790de72ff5f3d54d572f1f713992b86ae0d18
   title: "常增益滤波",
   author: "Yāng Xīnbīn",
   footer-cap: "Yāng Xīnbīn",
