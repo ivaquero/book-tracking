@@ -143,7 +143,5 @@ $ 𝒙 = ∑_(j=1)^N mu_j macron(𝒙)_j $
 
 当且仅当每个滤波中的状态$x$维数相同时，这才是可计算的。此外，每个滤波对$x[i]$的解释必须相同。例如，假设我们尝试使用 CV 模型和 CA 模型进行筛选。这是不可行的，因为$x$的维度不同。
 
-#pagebreak()
-
 #bibliography("data/track.bib", title: "参考文献", style: "future-science")
 

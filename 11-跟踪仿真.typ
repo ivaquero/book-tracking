@@ -370,8 +370,6 @@ $ macron(θ) = "atan"2 (frac(∑_(i=1)^n sin θ_i, n), frac(∑_(i=1)^n cos θ_i
   supplement: "图",
 )
 
-#pagebreak()
-
 = 辅助知识
 
 == 雷达
