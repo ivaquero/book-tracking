@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "无迹 Kalman 滤波",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 非线性问题
@@ -20,12 +17,10 @@ Kalman 滤波使用线性方程，因此只能处理线性问题。但世界是�
   figure(
     image("images/gaussian-linear.png", width: 90%),
     caption: "线性传递函数",
-    supplement: "图",
   ),
   figure(
     image("images/gaussian-nonlinear.png", width: 90%),
     caption: "非线性传递函数",
-    supplement: "图",
   ),
   columns: (200pt,) * 2,
   gutter: 2pt,
@@ -68,7 +63,6 @@ UKF 的主要的缺点是，其速度可能比 EKF 慢几倍，但这实际上�
 #figure(
   image("images/gaussian-nonlinear-scatter.png", width: 40%),
   caption: "非线性散点分布",
-  supplement: "图",
 )
 
 假设每次更新，我们都生成 500,000 个点，使它们通过传递函数，然后计算输出的均值和方差，即 Monte Carlo 方法，我们就可以拟合非线性。这些点被称为 Sigma 点。采样不需要专业知识，也不需要封闭形式的解决方案。无论函数多么非线性或行为多么糟糕，只要我们使用足够多的 Sigma 点进行采样，就能建立精确的输出分布。
@@ -78,7 +72,6 @@ UKF 的主要的缺点是，其速度可能比 EKF 慢几倍，但这实际上�
 #figure(
   image("images/sigmas-julier.png", width: 40%),
   caption: "Julier's Sigmas",
-  supplement: "图",
 )
 
 通过 Julier 算法 @julierScaledUnscentedTransformation2002 生成 Sigma 点，可以看到，这里有 5 个点以均值$(3, 17)$为中心，形成一种奇特的模式。这样的结果可能会比随机生成的 50 万个点还要好，甚至更好。
@@ -94,7 +87,6 @@ UKF 的主要的缺点是，其速度可能比 EKF 慢几倍，但这实际上�
 #figure(
   image("images/sigmas-3.png", width: 40%),
   caption: "Sigmas",
-  supplement: "图",
 )
 
 对于一个非常非线性的问题，我们可能希望中心点的权重远高于外围点，或者希望外围点的权重更高。一种通用的方法是计算加权均值$μ = ∑_i w_i f(𝒳_i)$，其中，$𝒳_i$为 Sigma 点。若我们对均值$μ$进行加权，那么对协方差$Σ$进行加权也是合理的。于是有
@@ -103,7 +95,7 @@ $
   1 &= ∑_i w_i^m\
   1 &= ∑_i w_i^c\
   μ &= ∑_i w_i^m f(𝒳_i)\
-  Σ &= ∑_i w_i^c (f(𝒳)_i - μ) (f(𝒳)_i - μ)^(⊤)
+  Σ &= ∑_i w_i^c (f(𝒳)_i - μ) (f(𝒳)_i - μ)^⊤
 $
 
 这些约束条件并不构成唯一的解。如，若将$w^m_0$ 变小，可通过将$w^m_1$ 和$w^m_2$ 变大来弥补。事实上，这些等式并不要求任一个点都是输入的均值。我们需要一种能满足这些约束条件的算法，最好每个维度只有 3 个点。
@@ -111,7 +103,6 @@ $
 #figure(
   image("images/sigmas-selection.png", width: 40%),
   caption: "Sigma 点的选择",
-  supplement: "图",
 )
 
 上图中，Sigma 点的大小与其权重呈正比。这些点并不位于椭圆的主轴和副轴上，但约束条件中没有要求。显示的点间距均匀，但约束条件没有要求。Sigma 点的排列和权重会影响如何对分布进行采样。相距较近的点会对局部效应进行采样，因此对于非常非线性的问题可能效果更好。而相距较远或偏离椭圆轴线较远的点，则会对非局部效应和 Non-Gaussian 行为进行采样。通过改变每个点的权重，可以缓解这种情况。若各点远离均值，但权重很低，我们就可将一些关于分布的知识纳入其中，而不会让问题的非线性造成不好的估计。
@@ -127,20 +118,24 @@ $
 第一个 Sigma 点是输入的均值。这就是上图中椭圆中心显示的 Sigma 点$𝓧_0$，其他的 Sigma 点称之为$𝓧_i$，令$κ = α^2(N + κ) - n$，有
 
 $
-  cases(delim: "{",
-𝓧^0_k &= hat(𝑿)_k &i = 0,
-𝓧^i_k &= hat(𝑿) + (sqrt((N +κ) 𝑷_k))_i quad &i = 1\, …\, N,
-𝓧^i_k &= hat(𝑿) - (sqrt((N +κ) 𝑷_k))_(i-N) &i = N+1\, …\, 2N)
+  cases(
+    delim: "{",
+    𝓧^0_k &= hat(𝑿)_k &i = 0,
+    𝓧^i_k &= hat(𝑿) + (sqrt((N +κ) 𝑷_k))_i quad &i = 1\, …\, N,
+    𝓧^i_k &= hat(𝑿) - (sqrt((N +κ) 𝑷_k))_(i-N) &i = N+1\, …\, 2N
+  )
 $
 
 其中，$sqrt((N +κ) 𝑷_k)$，可以使用 Cholesky 分解计算。简单说，我们用一个常数对协方差矩阵进行缩放，取其平方根，并通过与均值相加减来确保对称性。构成的矩阵为
 
 $
-  𝓧 = mat(delim: "[",
-𝒳_(0, 0), 𝒳_(0, 1), …, 𝒳_(0, n - 1);
-𝒳_(1, 0), 𝒳_(1, 1), …, 𝒳_(1, n - 1);
-⋮, ⋮, ⋱, ⋮;
-𝒳_(2 n, 0), 𝒳_(2 n, 1), …, 𝒳_(2 n, n - 1))
+  𝓧 = mat(
+    delim: "[",
+    𝒳_(0, 0), 𝒳_(0, 1), …, 𝒳_(0, n - 1);
+    𝒳_(1, 0), 𝒳_(1, 1), …, 𝒳_(1, n - 1);
+    ⋮, ⋮, ⋱, ⋮;
+    𝒳_(2 n, 0), 𝒳_(2 n, 1), …, 𝒳_(2 n, n - 1)
+  )
 $
 
 === 权重计算
@@ -168,7 +163,7 @@ Sigma 点的分布大致为$±1σ$乘以某个比例因子。分母中有一个$
 
 $
   hat(𝑿)_(k+1|k) = ∑_(i=0)^(2N) w_i 𝓧^(i)_(k+1|k) \
-  𝑷_(k+1|k) = ∑_(i=0)^(2N) w^c_i (𝓧^(i)_(k+1|k) - hat(𝒙)_(k+1|k)) (𝓧^(i)_(k+1|k) - hat(𝒙)_(k+1|k))^(⊤)
+  𝑷_(k+1|k) = ∑_(i=0)^(2N) w^c_i (𝓧^(i)_(k+1|k) - hat(𝒙)_(k+1|k)) (𝓧^(i)_(k+1|k) - hat(𝒙)_(k+1|k))^⊤
 $
 
 === 参数选择
@@ -185,7 +180,6 @@ $
 #figure(
   image("images/sigmas-merwe.png", width: 40%),
   caption: "Van der Merwe's Sigmas",
-  supplement: "图",
 )
 
 现在看看权重的变化。当$κ + N = 3$时，均值的权重为 0.6667，两个离群点的权重为 0.1667。而当$α = 200$时，均值权重飙升至 0.99999，离群点权重设置为 0.000004。由均值权重，随着$κ$的增大，均值权重$κ\/(n +κ) → 1$，而其余 Sigma 点的权重接近 0。因此，当我们采样的样本离均值越来越远时，我们最终会降低这些样本的权重，而若我们采样的样本非常接近均值，我们会给予所有样本非常相似的权重。
@@ -263,13 +257,13 @@ $
 新息协方差$𝑷_(𝒛)$，多以$𝑺$代替。故，状态更新协方差为
 
 $
-  𝑷_(k+1) = 𝑷_(k+1|k) - 𝑲_(k+1) 𝑺_(k+1) 𝑲^(⊤)_(k+1)
+  𝑷_(k+1) = 𝑷_(k+1|k) - 𝑲_(k+1) 𝑺_(k+1) 𝑲^⊤_(k+1)
 $
 
 从而有
 
 $
-  𝑲_(k+1) = ∑_(i=0)^(2 N) w^c_i tilde(𝑿)^i_(k+1|k) tilde(𝒁)^(i ⊤)_(k+1|k) [ ∑_(i=0)^(2 N) w^c_i tilde(𝒁)^i_(k+1|k) tilde(𝒁)^(⊤)_i_(k+1|k) + 𝑹_(k+1) ]^(-1)
+  𝑲_(k+1) = ∑_(i=0)^(2 N) w^c_i tilde(𝑿)^i_(k+1|k) tilde(𝒁)^(i ⊤)_(k+1|k) [ ∑_(i=0)^(2 N) w^c_i tilde(𝒁)^i_(k+1|k) tilde(𝒁)^⊤_i_(k+1|k) + 𝑹_(k+1) ]^(-1)
 $
 
 很多情况，增益可近似为
@@ -296,7 +290,7 @@ $ hat(𝑿)_(k+1) = macron(𝑿)_(k) + 𝑲_(k+1) 𝒚_(k+1) $
     [$𝓧 = f(𝒳)$],
     [$𝑿 = 𝑭 𝑿 + 𝑮 𝒖$],
     [$macron(𝑿) = ∑ w^m 𝓧$],
-    [$𝑷_(𝒙) = 𝑭 𝑷 𝑭^(⊤) + 𝑸$],
+    [$𝑷_(𝒙) = 𝑭 𝑷 𝑭^⊤ + 𝑸$],
     [$𝑷 = ∑ w^c tilde(𝑿)tilde(𝑿)(⊤) + 𝑸$],
     grid.hline(),
     grid.hline(),
@@ -306,18 +300,18 @@ $ hat(𝑿)_(k+1) = macron(𝑿)_(k) + 𝑲_(k+1) 𝒚_(k+1) $
     [$macron(𝒁) = ∑ w^m 𝓩$],
     [$𝒚 = 𝒁 - 𝑯 hat(𝑿)$],
     [$𝒚 = 𝒁 - macron(𝒁)$],
-    [$𝑺 = 𝑯 𝑷 𝑯^(⊤) + 𝑹$],
-    [$𝑺 = ∑ w^c 𝒚 𝒚^(⊤) + 𝑹$],
-    [$𝑲 = 𝑷 𝑯^(⊤) 𝑺^(-1)$],
-    [$𝑲 = [∑ w^c tilde(𝑿) 𝒚^(⊤)]𝑺^(-1)$],
+    [$𝑺 = 𝑯 𝑷 𝑯^⊤ + 𝑹$],
+    [$𝑺 = ∑ w^c 𝒚 𝒚^⊤ + 𝑹$],
+    [$𝑲 = 𝑷 𝑯^⊤ 𝑺^(-1)$],
+    [$𝑲 = [∑ w^c tilde(𝑿) 𝒚^⊤]𝑺^(-1)$],
     [$hat(𝑿) = macron(𝑿) + 𝑲 𝒚$],
     [$hat(𝑿) = macron(𝑿) + 𝑲 𝒚$],
     [$𝑷 = (𝑰 - 𝑲 𝑯) 𝑷$],
-    [$𝑷 = macron(𝑷) - 𝑲 𝑺 𝑲^(⊤)$],
+    [$𝑷 = macron(𝑷) - 𝑲 𝑺 𝑲^⊤$],
   ),
   caption: "LKF vs. UKF",
   supplement: "表",
   kind: table,
 )
 
-#bibliography("data/track.bib", title: "参考文献", style: "future-science")
+#bibliography("lib/track.bib", title: "参考文献", style: "future-science")

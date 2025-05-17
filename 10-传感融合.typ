@@ -1,11 +1,9 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "传感融合",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
+#import "@local/consketcher:0.1.0": *
 
 = 铺垫
 
@@ -14,7 +12,7 @@
 #theorem[
   对$n$个 Gaussian 分布，其积分布的参数如下
   $
-    σ_(N)^2 = frac(1, ∑_(i=1)^n 1/σ_i^2)\
+    σ_(N)^2 = frac(1, ∑_(i=1)^n 1 / σ_i^2)\
     μ_(N) = ∑_(i=1)^n μ_i / σ_i^2 σ_(N)^2
   $
 ]
@@ -22,13 +20,12 @@
 #figure(
   image("images/gaussian-prod.png", width: 40%),
   caption: "Gaussian 分布之积分布",
-  supplement: "图",
 )
 
 #theorem[
   $k$元 Gaussian 分布的 PDF 为
   $
-    p(𝒙) = 1 / sqrt((2π)^k |𝜮|) exp((- 1/2 (𝒙 - 𝝁))^T 𝜮^(-1) (𝒙 - 𝝁))
+    p(𝒙) = 1 / sqrt((2π)^k |𝜮|) exp((- 1 / 2 (𝒙 - 𝝁))^T 𝜮^(-1) (𝒙 - 𝝁))
   $
   其中，
   - $𝝁$为量测向量
@@ -46,7 +43,6 @@
 #figure(
   image("images/fusion-radar.png", width: 40%),
   caption: "两站雷达融合",
-  supplement: "图",
 )
 
 = 常用策略
@@ -55,55 +51,46 @@
 
 量测融合是最常用的数据融合方法。通常，它由配备多个传感器的系统使用。
 
-#figure(
-  diagram(
-    spacing: (2em, 2em),
-    node-stroke: 0.7pt,
-    mark-scale: 90%,
-    let (PD, UD, UP, FS) = ((0, 0), (2.3, 0), (4, 0), (4, -1)),
-    let (O, O1, M, I) = ((4.8, 0), (5.5, 0), (2.3, 1), (-1, 0)),
-    let (Z1, Z2) = ((3, -1), (5, -1)),
-    node(
-      PD,
-      text("Predict", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(
-      UD,
-      text("Unit Delay", size: 0.6em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(
-      UP,
-      text("Update", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(
-      FS,
-      text("Fusion", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(Z1, $𝒛_k^1$, stroke: 0pt),
-    node(Z2, $𝒛_k^2$, stroke: 0pt),
-    edge(PD, UD, "->", $hat(𝒙)_(k+1|k)$),
-    edge(UD, UP, "->", $hat(𝒙)_(k|k-1)$),
-    edge(FS, UP, "->", $𝒛_k$),
-    edge(UP, O1, "->", $hat(𝒙)_k$),
-    edge(
-      O,
-      M,
-      corner: right,
-    ),
-    edge(M, I, "-", corner: right),
-    edge(I, PD, "->"),
-    edge(Z1, FS, "->"),
-    edge(Z2, FS, "->"),
+#let fusion_measure = diagram(
+  spacing: (2em, 2em),
+  node-stroke: 0.7pt,
+  mark-scale: 90%,
+  let line = 0,
+  let line2 = -1,
+  let start = 0,
+  let (predict, delay, update, fusion) = (
+    (start, line),
+    (start + 2, line),
+    (start + 4, line),
+    (start + 4, line2),
   ),
-  supplement: "图",
+  let (output, output2) = (
+    (start + 5.5, line),
+    (start + 4.8, line),
+  ),
+  let (input1, input2) = (
+    (start + 3, line2),
+    (start + 5, line2),
+  ),
+  rnode(predict, text("Predict", size: 0.9em)),
+  rnode(delay, text("Unit Delay", size: 0.9em)),
+  rnode(update, text("Update", size: 0.9em)),
+  rnode(fusion, text("Fusion", size: 0.9em)),
+  node(input1, $𝒛_k^1$, stroke: 0pt),
+  node(input2, $𝒛_k^2$, stroke: 0pt),
+
+  arrow(predict, delay, $hat(𝒙)_(k+1|k)$),
+  arrow(delay, update, $hat(𝒙)_(k|k-1)$),
+  arrow(fusion, update, $𝒛_k$),
+  arrow(update, output, $hat(𝒙)_k$),
+  uturn2(output2, predict, "", height: 1),
+  arrow(input1, fusion, ""),
+  arrow(input2, fusion, ""),
+)
+
+#figure(
+  fusion_measure,
+
   caption: "量测融合",
 )
 
@@ -128,83 +115,68 @@ $
 - 外部系统可以接收雷达的轨道，并计算具有更高位置精度的统一轨道。
 状态融合也称航迹融合（track-to-track fusion）。
 
-#figure(
-  diagram(
-    spacing: (2em, 2em),
-    node-stroke: 0.7pt,
-    mark-scale: 90%,
-    let (PD, UD, UP) = ((0, 0), (2.3, 0), (4, 0)),
-    let (O, O1, M, I) = ((4.8, 0), (5.5, 0), (2.3, -1), (-1, 0)),
-    let (PD2, UD2, UP2) = ((0, 2), (2.3, 2), (4, 2)),
-    let (O2, O12, M2, I2) = ((4.8, 2), (5.5, 2), (2.3, 3), (-1, 2)),
-    let (Z1, Z2) = ((4, 0.8), (4, 1.2)),
-    node(
-      PD,
-      text("Predict", size: 0.9em),
-      height: 2em,
-      width: 4em,
-      corner-radius: 3pt,
-    ),
-    node(
-      UD,
-      text("Unit Delay", size: 0.6em),
-      corner-radius: 1pt,
-    ),
-    node(
-      UP,
-      text("Update", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(Z1, $𝒛_k^1$, stroke: 0pt),
-    node(Z2, $𝒛_k^2$, stroke: 0pt),
-    node(
-      PD2,
-      text("Predict", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(
-      UD2,
-      text("Unit Delay", size: 0.6em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    node(
-      UP2,
-      text("Update", size: 0.9em),
-      shape: rect,
-      corner-radius: 3pt,
-    ),
-    edge(PD, UD, "->", $hat(𝒙)_(k+1|k)$),
-    edge(UD, UP, "->", $hat(𝒙)_(k|k-1)^1$),
-    edge(UP, O1, "-", $hat(𝒙)_k^1$, label-side: right),
-    edge(
-      O,
-      M,
-      corner: left,
-    ),
-    edge(M, I, "-", corner: left),
-    edge(I, PD, "->"),
-    edge(Z1, UP, "->"),
-    edge(PD2, UD2, "->", $hat(𝒙)_(k+1|k)$),
-    edge(UD2, UP2, "->", $hat(𝒙)_(k|k-1)$),
-    edge(UP2, O12, "-", $hat(𝒙)_k^2$),
-    edge(
-      O2,
-      M2,
-      corner: right,
-    ),
-    edge(M2, I2, "-", corner: right),
-    edge(I2, PD2, "->"),
-    edge(Z2, UP2, "->"),
-    let (FS, FSF) = ((6, 1), (7, 1)),
-    node(FS, text($⊕$, size: 1.5em), stroke: 0pt),
-    edge(O1, FS, "->", corner: right),
-    edge(O12, FS, "->", corner: left),
-    edge(FS, FSF, "->", $hat(𝒙)_k$),
+#let fusion_status = diagram(
+  spacing: (2em, 2em),
+  node-stroke: 0.7pt,
+  mark-scale: 90%,
+  let line = 0,
+  let line2 = 1.6,
+  let line1 = (line + line2) / 2,
+  let start = 0,
+  let (predict, delay, update) = (
+    (start, line),
+    (start + 2, line),
+    (start + 4, line),
   ),
-  supplement: "图",
+  let (O, O1) = (
+    (start + 4.8, line),
+    (start + 5.5, line),
+  ),
+  let (predict2, delay2, update2) = (
+    (start + 0, line2),
+    (start + 2, line2),
+    (start + 4, line2),
+  ),
+  let (O2, O12) = (
+    (start + 4.8, line2),
+    (start + 5.5, line2),
+  ),
+  let (input1, input2) = (
+    (start + 3.5, line1 - 0.1),
+    (start + 4.5, line1 + 0.1),
+  ),
+  let (fusion_status, fusion) = (
+    (start + 6, line1),
+    (start + 7, line1),
+  ),
+
+  rnode(predict, text("Predict", size: 0.9em)),
+  rnode(delay, text("Unit Delay", size: 0.6em)),
+  rnode(update, text("Update", size: 0.9em)),
+  rnode(delay2, text("Unit Delay", size: 0.6em)),
+  rnode(predict2, text("Predict", size: 0.9em)),
+  rnode(update2, text("Update", size: 0.9em)),
+  node(input1, $𝒛_k^1$, stroke: 0pt),
+  node(input2, $𝒛_k^2$, stroke: 0pt),
+  arrow(predict, delay, $hat(𝒙)_(k+1|k)$),
+  arrow(delay, update, $hat(𝒙)_(k|k-1)^1$),
+  segment(update, O1, $hat(𝒙)_k^1$, label-side: right),
+  uturn2(O, predict, "", height: -1),
+  arrow(input1, update, "", corner: left),
+  arrow(predict2, delay2, $hat(𝒙)_(k+1|k)$),
+  arrow(delay2, update2, $hat(𝒙)_(k|k-1)$),
+  segment(update2, O12, $hat(𝒙)_k^2$),
+  uturn2(O2, predict2, "", height: 1),
+  arrow(input2, update2, "", corner: left),
+  node(fusion_status, text($⊕$, size: 1.5em), stroke: 0pt),
+  arrow(O1, fusion_status, "", corner: right),
+  arrow(O12, fusion_status, "", corner: left),
+  arrow(fusion_status, fusion, $hat(𝒙)_k$),
+)
+
+#figure(
+  fusion_status,
+
   caption: "状态融合",
 )
 
@@ -236,4 +208,4 @@ $
 
 有研究表明@bar-shalomEffectCommonProcess1986，当考虑到这种依赖性时，不确定性椭圆的面积会减少 70%，而独立噪声假设正确时只会减少 50%。
 
-#bibliography("data/track.bib", title: "参考文献", style: "future-science")
+#bibliography("lib/track.bib", title: "参考文献", style: "future-science")

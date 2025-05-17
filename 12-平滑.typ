@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "平滑",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 平滑器
@@ -50,20 +47,19 @@ RTS 平滑器的方程非常简单，易于实现。以下推导适用于线性 
 
 - 预测
 
-$ 𝑷 = 𝑭 𝑷_k 𝑭^(⊤) + 𝑸 $
+$ 𝑷 = 𝑭 𝑷_k 𝑭^⊤ + 𝑸 $
 
 - 更新
 
 $
-  𝑲_k &= 𝑷_k 𝑭^(⊤) 𝑷^(-1)\
+  𝑲_k &= 𝑷_k 𝑭^⊤ 𝑷^(-1)\
   𝒙_k &= 𝒙_k + 𝑲_k (𝒙_(k + 1) - 𝑭 𝒙_k)\
-  𝑷_k &= 𝑷_k + 𝑲_k (𝑷_(k + 1) - 𝑷) 𝑲_k^(⊤)
+  𝑷_k &= 𝑷_k + 𝑲_k (𝑷_(k + 1) - 𝑷) 𝑲_k^⊤
 $
 
 #figure(
   image("images/smoother-rts.png", width: 60%),
   caption: "RTS",
-  supplement: "图",
 )
 
 由上图，可以看到 KF（绿色虚线）与输入信号相比相当平滑，但当连续几次量测偏向理想线的一侧时，KF 仍会偏离理想线。相比之下，RTS 输出则极为平滑，非常接近理想输出。在噪声量更合理的情况下，可以看到 RTS 输出几乎位于理想输出上。KF 的输出虽然要好得多，但变化幅度仍然要大得多。
@@ -84,7 +80,6 @@ $ 𝒙 = mat(delim: "[", 𝒙_k; 𝒙_(k-1); ⋮; 𝒙_(k-N+1)) $
 #figure(
   image("images/smoother-fls.png", width: 60%),
   caption: "FLS",
-  supplement: "图",
 )
 
 在这里，当$N=8$，这意味着我们将把 8 次未来的量测结果纳入我们的估算中。这样，一旦滤波收敛，我们就能获得非常平滑的估计值，但代价是计算量大约是标准 KF 的 8 倍。

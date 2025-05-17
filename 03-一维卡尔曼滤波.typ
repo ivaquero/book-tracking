@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "一维 Kalman 滤波",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = Kalman 滤波模型
@@ -154,7 +151,7 @@ $
 
   $
     μ_x = frac(σ_1^2 μ_2 + σ_2^1 μ_1, σ_1^2 + σ_2^2)\
-    σ_x = frac(1, 1/σ_1^2 + 1/σ_2^2)
+    σ_x = frac(1, 1 / σ_1^2 + 1 / σ_2^2)
   $ <gauss_prod>
 ]
 
@@ -162,7 +159,7 @@ $
 
 $ μ_x = x + g_n (y - x) $
 
-其中，$x = μ_1$，$y = μ_2$，$g_n = σ^2_x/σ^2_y$。
+其中，$x = μ_1$，$y = μ_2$，$g_n = σ^2_x / σ^2_y$。
 
 当然，在这种情况下，$g$并不是一个常数，因为它随着每个时间步长的变化而变化，方差也随之变化。我们还可以用同样的方法推导出$h$的计算公式，结果为
 

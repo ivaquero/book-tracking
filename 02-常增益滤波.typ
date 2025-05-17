@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "常增益滤波",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 铺垫与术语
@@ -21,9 +18,9 @@
 
 $
   cases(
-    x = x_0 + v_(x 0) Δ t + 1/2 a_x Δ t^2\
-    y = y_0 + v_(y 0) Δ t + 1/2 a_y Δ t^2\
-    z = z_0 + v_(z 0) Δ t + 1/2 a_z Δ t^2
+    x = x_0 + v_(x 0) Δ t + 1 / 2 a_x Δ t^2\
+    y = y_0 + v_(y 0) Δ t + 1 / 2 a_y Δ t^2\
+    z = z_0 + v_(z 0) Δ t + 1 / 2 a_z Δ t^2
   )
 $
 
@@ -69,7 +66,7 @@ $
 
 $ y_(k) = z_(k) - hat(x)_(k|k-1) $
 
-不难看出，随着量测次数$k$的增大，当前估计会越来越接近先验估计，这里即前$k$次量测的均值。在实际应用中，增益因子$1/k$往往用更一般的$K_(k) ∈ [0,1]$代替，$K$即是 Kalman 增益。为了不显得那么急功近利，我们暂时用$α_(k)$ 来表示
+不难看出，随着量测次数$k$的增大，当前估计会越来越接近先验估计，这里即前$k$次量测的均值。在实际应用中，增益因子$1 / k$往往用更一般的$K_(k) ∈ [0,1]$代替，$K$即是 Kalman 增益。为了不显得那么急功近利，我们暂时用$α_(k)$ 来表示
 
 $ hat(x)_(k) = hat(x)_(k|k-1) + α_(k) (z_(k) - hat(x)_(k|k-1)) $
 
@@ -106,7 +103,6 @@ $
 #figure(
   image("images/gh-cv.png", width: 70%),
   caption: "匀速模型",
-  supplement: "图",
 )
 
 == 噪声与增益
@@ -139,12 +135,10 @@ $
     figure(
       image("images/gh-g.png", width: 60%),
       caption: "变化的 α（g）",
-      supplement: "图",
     ),
     figure(
       image("images/gh-h.png", width: 60%),
       caption: "变化的 β（h）",
-      supplement: "图",
     ),
   ),
 )
@@ -203,4 +197,4 @@ $
   信号在各个频段上的功率谱密度是一样的，由于白光是由各种频率（颜色）的单色光混合而成，因而此信号的这种具有平坦功率谱的性质被称作是"白色的"，此信号也因此被称作白噪声。相对的，其他不具有这一性质的噪声信号被称为有色噪声。
 ]
 
-#bibliography("data/track.bib", title: "参考文献", style: "future-science")
+#bibliography("lib/track.bib", title: "参考文献", style: "future-science")

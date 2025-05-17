@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "随机 Kalman 滤波",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 集合 Kalman 滤波
@@ -39,7 +36,7 @@ $
 
 现在我们可以选择计算均值的协方差。算法并不需要计算这个值，但它通常对分析很有用。方程为
 
-$ 𝑷 = frac(1, N-1) ∑_1^N [𝓧 - macron(𝒙)] [𝓧 - macron(𝒙)]^(⊤) $
+$ 𝑷 = frac(1, N-1) ∑_1^N [𝓧 - macron(𝒙)] [𝓧 - macron(𝒙)]^⊤ $
 
 === 更新
 
@@ -55,8 +52,8 @@ $
 现在我们可以计算每个量测 Sigma 点的协方差，以及量测 Sigma 点与 Sigma 点的交叉方差。这可以用以下两个等式表示
 
 $
-  𝑷_(𝒛) &= frac(1, N-1) ∑_1^N [𝓧_h - macron(𝒛)][𝓧_h - macron(𝒛)]^(⊤) + 𝑹\
-  𝑷_(𝒙 𝒛) &= frac(1, N-1) ∑_1^N [𝒳 - 𝒙^-][𝓧_h - macron(𝒛)]^(⊤)
+  𝑷_(𝒛) &= frac(1, N-1) ∑_1^N [𝓧_h - macron(𝒛)][𝓧_h - macron(𝒛)]^⊤ + 𝑹\
+  𝑷_(𝒙 𝒛) &= frac(1, N-1) ∑_1^N [𝒳 - 𝒙^-][𝓧_h - macron(𝒛)]^⊤
 $
 
 直接计算 Kalman 增益，然后更新 Sigma 点。
@@ -70,7 +67,7 @@ $
 
 $
   𝒙 &= 1 / N ∑_1^N 𝓧\
-  𝑷 &= 𝑷 - 𝑲 𝑷_(𝒛) 𝑲^(⊤)
+  𝑷 &= 𝑷 - 𝑲 𝑷_(𝒛) 𝑲^⊤
 $
 
 #tip[

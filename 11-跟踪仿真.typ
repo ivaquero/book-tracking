@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "跟踪仿真",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 抛物
@@ -22,35 +19,37 @@ $
 其中，$v_(x 0) = v cos(θ), v_(y 0) = v sin(θ)$。状态方程为
 
 $
-  x_t & = x_(t - 1) + v_(x(t - 1)) Δ t\
-  v_(x t) & = v_(x(t - 1))\
-  y_t & = y_(t - 1) + v_(y(t - 1)) Δ t\
-  v_(y t) & = - g Δ t + v_(y(t - 1))
+  x_t &= x_(t - 1) + v_(x(t - 1)) Δ t\
+  v_(x t) &= v_(x(t - 1))\
+  y_t &= y_(t - 1) + v_(y(t - 1)) Δ t\
+  v_(y t) &= - g Δ t + v_(y(t - 1))
 $
 
 === 状态变量与状态转移矩阵
 
 于是，状态向量为
 
-$ 𝒙 = mat(delim: "[", x, dot(x), y, dot(y), dot.double(y))^(⊤) $
+$ 𝒙 = mat(delim: "[", x, dot(x), y, dot(y), dot.double(y))^⊤ $
 
 加速度是由于重力造成的，而重力是一个常数。与其要求 Kalman 滤波跟踪一个常数，还不如将重力视为真正的控制输入。现在，我们将状态变量设计为
 
-$ 𝒙 = mat(delim: "[", x, dot(x), y, dot(y))^(⊤) $
+$ 𝒙 = mat(delim: "[", x, dot(x), y, dot(y))^⊤ $
 
 由状态变量，可知
 
 $
-  bold(F) = mat(delim: "[",
-1, Δ t, 0, 0;
-0, 1, 0, 0;
-0, 0, 1, Δ t;
-0, 0, 0, 1)
+  bold(F) = mat(
+    delim: "[",
+    1, Δ t, 0, 0;
+    0, 1, 0, 0;
+    0, 0, 1, Δ t;
+    0, 0, 0, 1
+  )
 $
 
 === 控制输入矩阵
 
-由状态方程，显然，这里最有利于计算的赋值方法是令$𝑮 𝒖 = [0, 0, 0, -g Δ t]^(⊤)$，于是，有
+由状态方程，显然，这里最有利于计算的赋值方法是令$𝑮 𝒖 = [0, 0, 0, -g Δ t]^⊤$，于是，有
 
 $
   𝑮 = dmat(delim: "[", 0, 0, 0, Δ t),
@@ -67,11 +66,13 @@ $
 但这种方案并不能反映物理直觉。对二维输入，上一个方案可简化为
 
 $
-  𝑮 = mat(delim: "[",
-0, 0;
-0, 0;
-0, 0;
-0, Δ t),
+  𝑮 = mat(
+    delim: "[",
+    0, 0;
+    0, 0;
+    0, 0;
+    0, Δ t
+  ),
   𝒖 = mat(delim: "[", 0; - g)
 $
 
@@ -117,11 +118,11 @@ $
 又由$F = m a$，可得
 
 $
-  a_x & = -B_2 / m v v_x\
-  a_y & = -B_2 / m v v_y
+  a_x &= -B_2 / m v v_x\
+  a_y &= -B_2 / m v v_y
 $
 
-Giordano 为$B_2/m$提供了以下函数，其中考虑到了空气密度、物体横截面及其粗糙度。请注意，这是根据风洞试验和几个简化假设得出的近似值。它采用国际单位制：速度单位为米/秒，时间单位为秒。
+Giordano 为$B_2 / m$提供了以下函数，其中考虑到了空气密度、物体横截面及其粗糙度。请注意，这是根据风洞试验和几个简化假设得出的近似值。它采用国际单位制：速度单位为米/秒，时间单位为秒。
 
 $ B_2 / m = 0.0039 + frac(0.0058, 1 + exp[(v - 35) \/ 5]) $
 
@@ -130,7 +131,6 @@ $ B_2 / m = 0.0039 + frac(0.0058, 1 + exp[(v - 35) \/ 5]) $
 #figure(
   image("images/trk-parabola.png", width: 40%),
   caption: "抛物运动",
-  supplement: "图",
 )
 
 当加速度不够大，即非线性不够强时，可适当增加过程噪声，来避免使用非线性 KF。
@@ -138,7 +138,6 @@ $ B_2 / m = 0.0039 + frac(0.0058, 1 + exp[(v - 35) \/ 5]) $
 #figure(
   image("images/trk-parabola-q.png", width: 40%),
   caption: "采用不同过程噪声拟合",
-  supplement: "图",
 )
 
 = 匀速飞机
@@ -165,7 +164,6 @@ $
 #figure(
   image("images/radar.png", width: 40%),
   caption: "雷达示意图",
-  supplement: "图",
 )
 
 === EFK
@@ -211,11 +209,13 @@ $
 
 $
   𝒙 =
-  mat(delim: "[",
-1, Δ t, 0, 0;
-0, 1, 0, 0;
-0, 0, 1, Δ t;
-0, 0, 0, 1)
+  mat(
+    delim: "[",
+    1, Δ t, 0, 0;
+    0, 1, 0, 0;
+    0, 0, 1, Δ t;
+    0, 0, 0, 1
+  )
   mat(delim: "[", x; dot(x); y; dot(y))
 $
 
@@ -248,15 +248,17 @@ $ 𝑯 = pdv(𝒉(macron(𝒙)_k), macron(𝒙))\|_(macron(𝒙)_k) $
 进而有
 
 $
-  pdv(𝑯, macron(𝒙)) = mat(delim: "[",
-pdv(h_1, x_1), pdv(h_1, x_2), …;
-pdv(h_2, x_1), pdv(h_2, x_2), …; ⋮, ⋮, )
+  pdv(𝑯, macron(𝒙)) = mat(
+    delim: "[",
+    pdv(h_1, x_1), pdv(h_1, x_2), …;
+    pdv(h_2, x_1), pdv(h_2, x_2), …; ⋮, ⋮,
+  )
 $
 
 对于当前的问题，有
 
 $
-  𝑯 = [pdv(s:\/, h, x), pdv(s:\/, h, dot(x)), pdv(s:\/, h, y)] = [x / sqrt(x^2 + y^2), 0, y / sqrt(x^2 + y^2)]
+  𝑯 = [pdv(s: \/, h, x), pdv(s: \/, h, dot(x)), pdv(s: \/, h, y)] = [x / sqrt(x^2 + y^2), 0, y / sqrt(x^2 + y^2)]
 $
 
 此处的$𝑹$相对简单，可令
@@ -273,7 +275,6 @@ $ 𝑹 = [σ^2_("range")] $
 #figure(
   image("images/model-bicycle.png", width: 40%),
   caption: "自行车模型",
-  supplement: "图",
 )
 
 这里可以看到前轮胎相对于轴距指向$α$方向。在很短的时间内，汽车向前行驶，后轮最终更靠前并略微向内转动，如蓝色阴影轮胎所示。在如此短的时间内，我们可以将其近似为绕半径$R$转弯。转动角为
@@ -303,11 +304,11 @@ $
 
 由上，状态向量为
 
-$ 𝒙 = [x, y, θ]^(⊤) $
+$ 𝒙 = [x, y, θ]^⊤ $
 
 控制输入为
 
-$ 𝒖 = [v, α]^(⊤) $
+$ 𝒖 = [v, α]^⊤ $
 
 通过如下函数来实现状态传递函数$f(x)$
 
@@ -327,7 +328,7 @@ $ 𝑭 = pdv(f(x, u), x) = jmat(delim: "[", f_1, f_2, f_3; x, y, θ) $
 
 $ 𝑴 = mat(delim: "[", σ_("vel")^2, 0; 0, σ_α^2) $
 
-由于我们的模型是非线性的，因此无法通过$𝑭 𝑴 𝑭^(⊤)$形式从控制空间转换到状态空间，得到一个闭合形式的解，取而代之的是用一个 Jacobian 将其线性化
+由于我们的模型是非线性的，因此无法通过$𝑭 𝑴 𝑭^⊤$形式从控制空间转换到状态空间，得到一个闭合形式的解，取而代之的是用一个 Jacobian 将其线性化
 
 $
   𝑽 = pdv(f(x, u), u) jmat(delim: "[", f_1, f_2, f_3; v, α)
@@ -335,7 +336,7 @@ $
 
 从而有
 
-$ 𝑷 = 𝑭 𝑷 𝑭^(⊤) + 𝑽 𝑴 𝑽^(⊤) $
+$ 𝑷 = 𝑭 𝑷 𝑭^⊤ + 𝑽 𝑴 𝑽^⊤ $
 
 这种线性化形式并非预测$𝒙$的唯一方法。例如，可以使用 Runge Kutta 等数值积分技术来计算机器人的运动。若时间步长相对较大，则需要使用这种方法。
 
@@ -367,7 +368,6 @@ $ macron(θ) = "atan"2 (frac(∑_(i=1)^n sin θ_i, n), frac(∑_(i=1)^n cos θ_i
 #figure(
   image("images/model-robot.png", width: 40%),
   caption: "转弯机器人",
-  supplement: "图",
 )
 
 = 辅助知识
@@ -396,4 +396,4 @@ $
 
 其中，$c$为光速。
 
-#bibliography("data/track.bib", title: "参考文献", style: "future-science")
+#bibliography("lib/track.bib", title: "参考文献", style: "future-science")

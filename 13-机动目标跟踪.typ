@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "机动目标跟踪",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 自适应
@@ -33,7 +30,6 @@ CA 模型能够无滞后地跟踪机动，但代价是在稳态行为期间输�
 #figure(
   image("images/adkf-ca.png", width: 40%),
   caption: "KF - CA",
-  supplement: "图",
 )
 
 == 识别机动
@@ -43,7 +39,6 @@ CA 模型能够无滞后地跟踪机动，但代价是在稳态行为期间输�
 #figure(
   image("images/adaptive-residual.png", width: 50%),
   caption: "残差图",
-  supplement: "图",
 )
 
 左图显示的是量测与 KF 最终输出之间的差异，而右图显示的是量测与过程模型预测之间的差异。这似乎是一个微妙的区别，但从图中可以看出并非如此。左图中机动开始时的偏差量很小，但右图中的偏差却说明了不同的情况。若被跟踪物体是按照过程模型运动的，那么残差图应该在 0.0 左右跳动。简单说，就是
@@ -62,16 +57,15 @@ $ "measurement" = "process_model"(t) + "maneuver_delta"(t) + "noise"(t) $
 
 Bar-Shalom @bar-shalomEstimationApplicationsTracking2001 使用以下公式对残差的平方进行归一化处理：
 
-$ ϵ = 𝒚^(⊤)𝑺^(-1)𝒚 ≈ 𝒚^2 / 𝑺 $
+$ ϵ = 𝒚^⊤𝑺^(-1)𝒚 ≈ 𝒚^2 / 𝑺 $
 
 其中，$𝒚$为新息（残差），$𝑺$为新息协方差，其方程为
 
-$ 𝑺 = 𝑯 𝑷 𝑯^(⊤) + 𝑹 $
+$ 𝑺 = 𝑯 𝑷 𝑯^⊤ + 𝑹 $
 
 #figure(
   image("images/adkf-residual.png", width: 40%),
   caption: "新息",
-  supplement: "图",
 )
 
 上图图可以清楚地显示新息归一化的效果。对新息进行平方处理可确保信号始终大于$0$，而用了量测协方差对信号进行归一化处理，则可使我们区分新息相对于了量测噪声发生明显变化的时间。机动从$t = 3$秒开始，可以看到$ϵ$开始迅速增加。一旦$ϵ$超过某个极限，我们就需要将$𝑸$按比例放大，而一旦它再次低于该极限，我们又要将$𝑸$按比例缩小。
@@ -81,7 +75,6 @@ $ 𝑺 = 𝑯 𝑷 𝑯^(⊤) + 𝑹 $
 #figure(
   image("images/adkf-e.png", width: 40%),
   caption: "ϵ = 4",
-  supplement: "图",
 )
 
 另一种非常相似的方法来自 Zarchan @zarchanProgressAstronauticsAeronautics2005a，它根据量测误差协方差的标准差设定限值，公式为
@@ -115,7 +108,7 @@ KF 是递归的，但它会将之前的所有量测结果纳入当前的滤波�
 
 FMF 通过降低较早量测值的权重，提高较晚量测值的权重来解决这一问题。简单说，FMF 将 KF 的估计协方差方程修改为
 
-$ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^(⊤) + 𝑸 $
+$ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^⊤ + 𝑸 $
 
 其中，$α > 1$。若增加估算误差协方差，滤波就会对其估算变得更加不确定，因此会给予量测更大的权重。
 
@@ -126,7 +119,6 @@ $ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^(⊤) + 𝑸 $
 #figure(
   image("images/adkf-alpha.png", width: 40%),
   caption: "α",
-  supplement: "图",
 )
 
 
@@ -148,7 +140,7 @@ $ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^(⊤) + 𝑸 $
 
 $ 𝑷_(k+1|k) = mat(delim: "[", p_(11), p_(12); p_(21), p_(22)) $
 
-增益$𝑲 = [α, β/(Δ t)]^(⊤)$的各元素分别为
+增益$𝑲 = [α, β / (Δ t)]^⊤$的各元素分别为
 
 $
   α = frac(p_(11), p_(11) + σ_w^2), quad
@@ -157,11 +149,11 @@ $
 
 此时的预测协方差更新方程为
 
-$ 𝑷_(k+1) = 𝑷_(k+1|k) - (p_(11)+σ_w^2) 𝑲_(k+1)𝑲_(k+1)^(⊤) $
+$ 𝑷_(k+1) = 𝑷_(k+1|k) - (p_(11)+σ_w^2) 𝑲_(k+1)𝑲_(k+1)^⊤ $
 
 == α-β-γ 滤波
 
-类比 α-β 滤波，增益$𝑲 = [α, β/(Δ t), γ/(Δ t^2)]^(⊤)$的各元素分别为
+类比 α-β 滤波，增益$𝑲 = [α, β / (Δ t), γ / (Δ t^2)]^⊤$的各元素分别为
 
 $
   α = frac(p_(11), p_(11) + σ_w^2), quad
@@ -183,11 +175,13 @@ $
 
 $
   mat(delim: "[", dot(x)_(t); dot.double(x)_(t); dot(y)_(t); dot.double(y)_(t)) =
-  mat(delim: "[",
-0, 1, 0, 0;
-0, 0, 0, -ω_(t);
-0, 0, 0, 1;
-0, ω_(t), 0, 0)
+  mat(
+    delim: "[",
+    0, 1, 0, 0;
+    0, 0, 0, -ω_(t);
+    0, 0, 0, 1;
+    0, ω_(t), 0, 0
+  )
   mat(delim: "[", x_(t); dot(x)_(t); y_(t); dot(y)_(t)) + 𝑽_(t)
 $
 
@@ -198,26 +192,32 @@ $
 - 转角速率$ω$已知时
 
 $
-  𝑭_(k) = mat(delim: "[",
-1, frac(sin(ω Δ t), ω), 0, frac(cos(ω Δ t) - 1, ω);
-0, cos(ω Δ t), 0, - sin(ω Δ t); 0, frac(1 - cos(ω Δ t), ω), 1, frac(sin(ω Δ t), ω);
-0, sin(ω Δ t), 0, cos(ω Δ t))
+  𝑭_(k) = mat(
+    delim: "[",
+    1, frac(sin(ω Δ t), ω), 0, frac(cos(ω Δ t) - 1, ω);
+    0, cos(ω Δ t), 0, - sin(ω Δ t); 0, frac(1 - cos(ω Δ t), ω), 1, frac(sin(ω Δ t), ω);
+    0, sin(ω Δ t), 0, cos(ω Δ t)
+  )
 $
 
 - 转角速率$ω$未知时
 
 $
-  𝑭_(k) = mat(delim: "[",
-1, frac(sin(ω Δ t), ω), 0, frac(cos(ω Δ t) - 1, ω), 0;
-0, cos(ω Δ t), 0, - sin(ω Δ t), 0; 0, frac(1 - cos(ω Δ t), ω), 1, frac(sin(ω Δ t), ω), 0;
-0, sin(ω Δ t), 0, cos(ω Δ t), 0; 0, 0, 0, 0, 1)
+  𝑭_(k) = mat(
+    delim: "[",
+    1, frac(sin(ω Δ t), ω), 0, frac(cos(ω Δ t) - 1, ω), 0;
+    0, cos(ω Δ t), 0, - sin(ω Δ t), 0; 0, frac(1 - cos(ω Δ t), ω), 1, frac(sin(ω Δ t), ω), 0;
+    0, sin(ω Δ t), 0, cos(ω Δ t), 0; 0, 0, 0, 0, 1
+  )
 $
 
 此时
 
 $
-  𝑮_(k) = mat(delim: "[",
-Δ t^2/2, Δ t, 0, 0, 0; 0, 0, Δ t^2/2, Δ t, 0; 0, 0, 0, 0, 1)^(⊤)
+  𝑮_(k) = mat(
+    delim: "[",
+    Δ t^2 / 2, Δ t, 0, 0, 0; 0, 0, Δ t^2 / 2, Δ t, 0; 0, 0, 0, 0, 1
+  )^⊤
 $
 
-#bibliography("data/track.bib", title: "参考文献", style: "future-science")
+#bibliography("lib/track.bib", title: "参考文献", style: "future-science")

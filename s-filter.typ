@@ -1,11 +1,9 @@
-#import "@local/touying-quick:0.1.0": *
+#import "lib/lib.typ": *
 #show: touying-quick.with(
   title: "常增益滤波",
-  subtilte: "Kalman 滤波系列课程第1讲",
-  author: "主讲：杨鑫斌",
+  subtitle: "Kalman 滤波系列课程第1讲",
   author-size: 20pt,
-  institute: "能源与智能工程学院",
-  footer: "Kalman 滤波系列课程",
+  info: slide,
   lang: "zh",
 )
 
@@ -24,9 +22,9 @@
 
 $
   cases(
-    x = x_0 + v_(x 0) Δ t + 1/2 a_x Δ t^2\
-    y = y_0 + v_(y 0) Δ t + 1/2 a_y Δ t^2\
-    z = z_0 + v_(z 0) Δ t + 1/2 a_z Δ t^2
+    x = x_0 + v_(x 0) Δ t + 1 / 2 a_x Δ t^2\
+    y = y_0 + v_(y 0) Δ t + 1 / 2 a_y Δ t^2\
+    z = z_0 + v_(z 0) Δ t + 1 / 2 a_z Δ t^2
   )
 $
 
@@ -60,7 +58,7 @@ $
 
 $ y_(k) = z_(k) - hat(x)_(k|k-1) $
 
-不难看出，随着量测次数$k$的增大，当前估计会越来越接近先验估计，这里即前$k$次量测的均值。在实际应用中，增益因子$1/k$往往用更一般的$K_(k) ∈ [0,1]$代替，$K$即是 Kalman 增益。为了不显得那么急功近利，我们暂时用$α_(k)$ 来表示
+不难看出，随着量测次数$k$的增大，当前估计会越来越接近先验估计，这里即前$k$次量测的均值。在实际应用中，增益因子$1 / k$往往用更一般的$K_(k) ∈ [0,1]$代替，$K$即是 Kalman 增益。为了不显得那么急功近利，我们暂时用$α_(k)$ 来表示
 
 $ hat(x)_(k) = hat(x)_(k|k-1) + α_(k) (z_(k) - hat(x)_(k|k-1)) $
 
@@ -96,7 +94,6 @@ $
 #figure(
   image("images/gh-cv.png", width: 65%),
   caption: "α-β 滤波",
-  supplement: "图",
 )
 
 == 增益的影响
@@ -109,12 +106,10 @@ $
     figure(
       image("images/gh-g.png", width: 50%),
       caption: "变化的 α（g）",
-      supplement: "图",
     ),
     figure(
       image("images/gh-h.png", width: 50%),
       caption: "变化的 β（h）",
-      supplement: "图",
     ),
   ),
 )
@@ -129,15 +124,12 @@ $
     #theorem[
       设$X_1 ∼ 𝒩(μ_1, σ_1^2), X_2 ∼ 𝒩(μ_2, σ_2^2)$，且$X_1$和$X_2$相互独立，则 Gaussian 积分布的参数为
 
-      $
-        μ_x = frac(σ_1^2 μ_2 + σ_2^1 μ_1, σ_1^2 + σ_2^2)\
-        σ_x = frac(1, 1/σ_1^2 + 1/σ_2^2)
-      $
+      $ μ_x = frac(σ_1^2 μ_2 + σ_2^1 μ_1, σ_1^2 + σ_2^2)\
+      σ_x = frac(1, 1 / σ_1^2 + 1 / σ_2^2) $
     ],
     #figure(
       image("images/gaussian-prod.png", width: 100%),
       caption: "Gaussian 分布的积",
-      supplement: "图",
     )
   ],
 )

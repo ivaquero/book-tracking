@@ -1,4 +1,4 @@
-#import "@local/touying-quick:0.1.0": *
+#import "lib/lib.typ": *
 #show: touying-quick.with(
   title: "拉格朗日插值在羊群追踪中的应用",
   subtilte: "目标跟踪系列课程第1讲",
@@ -28,7 +28,6 @@
     #figure(
       image("slides/grid.png", width: 100%),
       // caption: "动物的运动轨迹",
-      supplement: "图",
     )
   ],
 )
@@ -50,12 +49,11 @@
     #figure(
       image("slides/interp-lagrange-5.png", width: 90%),
       caption: none,
-      supplement: "图",
     )
   ],
 )
 
-#idea(title: text("辅助软件", fill: black), content-inset: 0.8em, header-inset: 0.4em)[
+#tip(title: text("辅助软件", fill: black))[
   课程绘图及实验使用 GeoGebra，该软件可从其官网和手机商店中下载安装。
 ]
 
@@ -67,24 +65,28 @@
 #let lagrange = csv("slides/lagrange.csv")
 
 #figure(
-  ktable(lagrange, 6),
+  tableq(lagrange, 6),
   // caption: "5个点的坐标",
   supplement: [表],
   kind: table,
 )
 
 $
-  mat(delim: "[", -1.0;1.0;-0.5;
-      0.0;1.5) = mat(delim: "[",
-      1, - 3,(-3)^2,(-3)^3,(-3)^4 ;
-      1, - 2,(-2)^2,(-2)^3,(-2)^4 ;
-      1, 0, 0^2, 0^3, 0^4 ;
-      1, 1, 1^2, 1^3, 1^4 ;
-      1, 3, 3^2, 3^3, 3^4)
-  mat(delim: "[", a_0 ;a_1 ;a_2 ;a_3;a_4)
+  mat(
+    delim: "[", -1.0; 1.0; -0.5;
+    0.0; 1.5
+  ) = mat(
+    delim: "[",
+    1, - 3, (-3)^2, (-3)^3, (-3)^4;
+    1, - 2, (-2)^2, (-2)^3, (-2)^4;
+    1, 0, 0^2, 0^3, 0^4;
+    1, 1, 1^2, 1^3, 1^4;
+    1, 3, 3^2, 3^3, 3^4
+  )
+  mat(delim: "[", a_0; a_1; a_2; a_3; a_4)
 $
 
-#warning(title: text("注意", fill: black), content-inset: 0.8em, header-inset: 0.4em)[
+#warning(title: text("注意", fill: black))[
   当数据点增多时，Vandermonde 矩阵的行列式会变得非常大，计算量也会增加。
 ]
 
@@ -112,7 +114,7 @@ $
 $
 
 #figure(
-  ktable(lagrange, 6),
+  tableq(lagrange, 6),
   // caption: "5个点的坐标",
   supplement: [表],
   kind: table,
@@ -136,7 +138,6 @@ $
   columns: (200pt,) * 3,
   gutter: 10pt,
   // caption: "插值多项式",
-  supplement: "图",
 )
 
 #sgrid(
@@ -151,7 +152,6 @@ $
   columns: (200pt,) * 2,
   gutter: 10pt,
   // caption: "插值多项式",
-  supplement: "图",
 )
 
 == 拉格朗日插值公式
@@ -180,7 +180,6 @@ $
   columns: (240pt,) * 3,
   gutter: 20pt,
   // caption: "插值多项式",
-  supplement: "图",
 )
 
 == 改进
@@ -238,7 +237,6 @@ $
     #figure(
       image("slides/interp-lagrange-5yy.png", width: 100%),
       caption: none,
-      supplement: "图",
     )
   ],
 )
@@ -261,7 +259,6 @@ $
     #figure(
       image("slides/py.png", width: 90%),
       caption: none,
-      supplement: "图",
     )
   ],
 )

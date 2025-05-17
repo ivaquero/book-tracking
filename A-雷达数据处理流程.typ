@@ -1,10 +1,7 @@
-#import "@local/qooklet:0.1.0": *
-#show: qooklet.with(
+#import "lib/lib.typ": *
+#show: chapter-style.with(
   title: "雷达数据处理流程",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "目标追踪",
-  lang: "zh",
+  info: info,
 )
 
 = 约定
@@ -157,7 +154,6 @@
 #figure(
   image("docs/fus-1-plot-base.drawio.png", width: 70%),
   caption: "单目标点迹处理",
-  supplement: "图",
 )
 
 === 数据过滤条件
@@ -188,7 +184,6 @@
 #figure(
   image("docs/fus-1-plot-mult.drawio.png", width: 60%),
   caption: "多目标点迹处理",
-  supplement: "图",
 )
 
 = 航迹相关处理
@@ -206,7 +201,6 @@
 #figure(
   image("docs/fus-2-corr.drawio.png", width: 60%),
   caption: "单目标航迹相关处理",
-  supplement: "图",
 )
 
 == 多目标
@@ -218,7 +212,6 @@
 #figure(
   image("docs/fus-3-auto.drawio.png", width: 60%),
   caption: "航迹自动起始",
-  supplement: "图",
 )
 
 == 获取暂航文件指针
@@ -268,7 +261,6 @@
 #figure(
   image("docs/fus-4-track.drawio.png", width: 60%),
   caption: "航迹跟踪",
-  supplement: "图",
 )
 
 === 跟踪数据更新
@@ -307,7 +299,6 @@
 #figure(
   image("docs/fus-5-filter.drawio.png", width: 90%),
   caption: "航迹滤波",
-  supplement: "图",
 )
 
 == 滤波预测
@@ -364,7 +355,6 @@
 #figure(
   image("docs/fus-6-beam.drawio.png", width: 90%),
   caption: "波束调度",
-  supplement: "图",
 )
 
 = 模拟目标处理
@@ -496,7 +486,7 @@
 
 #let data = csv("data/term-radar.csv")
 #figure(
-  ktable(data, 4),
+  tableq(data, 4),
   caption: "生词表",
   supplement: "表",
   kind: table,
