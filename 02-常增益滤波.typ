@@ -33,7 +33,7 @@ $
 $
   hat(x)_(k)
   &= 1 / k (z_(1) + z_(2) + … + z_(k-1) + z_(k))\
-  &= (k-1) / k (#pin("s1")1#pin("s2")) / (#pin("s3")k-1#pin("s4")) #pin("s5")∑_(i=1)^(k-1) z_(i)#pin("s6") + 1 / k z_(k)\
+  &= (k-1) / k (#pin("s1")1#pin("s2")) / (#pin("s3")k-1#pin("s4")) #pin("s5")sum_(i=1)^(k-1) z_(i)#pin("s6") + 1 / k z_(k)\
   &= (k-1) / k #pin(7)hat(x)_(k|k-1)#pin(8) + 1 / k z_(k)\
   &= hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
 $

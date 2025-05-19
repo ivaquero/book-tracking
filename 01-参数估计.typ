@@ -32,7 +32,7 @@ $ p(𝒁|𝒙) = ∏_(i=1)^N p(z_i|𝒙) $
 
 为了求$𝒙$的大小，采用 MLE，即
 
-$ 𝒙_"MLE" = arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 ∑_(i=1)^N log p(z_i|𝒙) $
+$ 𝒙_"MLE" = arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 sum_(i=1)^N log p(z_i|𝒙) $
 
 其中，$ℒ(𝒙) = log p(𝒁|𝒙)$被称为似然函数。
 
@@ -78,7 +78,7 @@ $ 𝒀 = 𝒙^⊤ 𝒁 + ɛ, ɛ ∼ 𝒩(0, σ^2) $
 
 对这个问题，采用$ℓ_2$-范数定义损失函数
 
-$ ℒ(𝒙) = ∑_(i=1)^n norm(𝒙^⊤ z_i - y_i)_2^2 $
+$ ℒ(𝒙) = sum_(i=1)^n norm(𝒙^⊤ z_i - y_i)_2^2 $
 
 展开得
 
@@ -124,7 +124,7 @@ $ hat(𝒙)_("MMSE") = arg min_("𝒙̂") 𝔼[(hat(𝒙) - 𝒙)^2|𝒁] $
 
 其解为条件均值，用条件 PDF 可表示为
 
-$ hat(𝒙)_("MMSE") = 𝔼[𝒙|𝒁] = ∫𝒙 p(𝒙|𝒁) dd(𝒙) $
+$ hat(𝒙)_("MMSE") = 𝔼[𝒙|𝒁] = ∫ 𝒙 p(𝒙|𝒁) dd(𝒙) $
 
 由于 MMSE 均方误差矩阵不大于其他估计准则得到的均方误差矩阵，故又被称为最小方差估计（minimum variance estimation，MVE）。
 
@@ -150,35 +150,35 @@ $ 𝒁 = (z_1, z_2, …, z_N)^⊤, 𝒀 = (y_1, y_2, …, y_N)^⊤ $
 
 在 MLE 中
 
-$ 𝒙_("MLE") &= arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 med ∑_(i=1)^N log p(z_i|𝒙) $
+$ 𝒙_("MLE") &= arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 med sum_(i=1)^N log p(z_i|𝒙) $
 
 考虑 Gaussian 分布的 PDF，代入似然函数，有
 
 $
   ℒ(𝒙) = log p(𝒁|𝒙)
-  &= ∑_(i=1)^N log frac(1, sqrt(2π)σ) exp(-(z_i - μ)^2 / (2σ^2)) \
-  &= ∑_(i=1)^N [log frac(1, sqrt(2π)) - log σ - frac(1, 2σ^2)(z_i - μ)^2]
+  &= sum_(i=1)^N log frac(1, sqrt(2π)σ) exp(-(z_i - μ)^2 / (2σ^2)) \
+  &= sum_(i=1)^N [log frac(1, sqrt(2π)) - log σ - frac(1, 2σ^2)(z_i - μ)^2]
 $
 
 对$μ$的极值，有
 
-$ μ_("MLE") = arg min_μ med ∑_(i=1)^N (z_i - μ)^2 $
+$ μ_("MLE") = arg min_μ med sum_(i=1)^N (z_i - μ)^2 $
 
 于是
 
 $
-  pdv(, μ) ∑_(i=1)^N (z_i - μ)^2 = 0 ⇒
-  μ_"MLE" = frac(1, N) ∑_(i=1)^N z_i
+  pdv(, μ) sum_(i=1)^N (z_i - μ)^2 = 0 ⇒
+  μ_"MLE" = frac(1, N) sum_(i=1)^N z_i
 $
 
 对$σ$的极值，有
 
-$ σ_("MLE") &= arg min_σ med ∑_(i=1)^N [- log σ - frac(1, 2 σ^2)(z_i - μ)^2] $
+$ σ_("MLE") &= arg min_σ med sum_(i=1)^N [- log σ - frac(1, 2 σ^2)(z_i - μ)^2] $
 
 于是
 
 $
-  pdv(, σ) ∑_(i=1)^N [log σ+frac(1, 2σ^2)(z_i - μ)^2] = 0 ⇒ σ_"MLE"^2= frac(1, N) ∑_(i=1)^N (z_i - μ)^2
+  pdv(, σ) sum_(i=1)^N [log σ+frac(1, 2σ^2)(z_i - μ)^2] = 0 ⇒ σ_"MLE"^2= frac(1, N) sum_(i=1)^N (z_i - μ)^2
 $
 
 == 最大后验估计

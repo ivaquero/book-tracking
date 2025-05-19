@@ -363,7 +363,7 @@ $ 𝑹 = mat(delim: "[", σ_("range")^2, 0; 0, σ_("bearing")^2) $
 
 需要注意的是，无迹变换计算的是状态向量和量测向量的均值，但每个向量都包含一个方位。计算一组角度的均值没有唯一的方法。例如，$359$和$3°$的均值是应该是$1°$，但经单方法却得到了$181°$。一种常见的方法是取正弦和余弦之和的反正弦。
 
-$ macron(θ) = "atan"2 (frac(∑_(i=1)^n sin θ_i, n), frac(∑_(i=1)^n cos θ_i, n)) $
+$ macron(θ) = "atan"2 (frac(sum_(i=1)^n sin θ_i, n), frac(sum_(i=1)^n cos θ_i, n)) $
 
 #figure(
   image("images/model-robot.png", width: 40%),

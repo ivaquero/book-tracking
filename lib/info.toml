@@ -1,7 +1,7 @@
 [global]
     title = ""
-    footer-cap = "Yāng Xīnbīn"
-    header-cap = "目标追踪"
+    footer = "Yāng Xīnbīn"
+    header = "目标追踪"
     lang = "zh"
 
 [slide]

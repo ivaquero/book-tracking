@@ -159,7 +159,7 @@ $
 将5个拉格朗日基与数据点相乘，得到插值多项式，即
 
 $
-  p(x) = ∑_(j = 0)^n y_j l_j (x), quad l_j (x) = (∏_(k = 0, k ≠ j)^n (x - x_k)) / (∏_(k = 0, k ≠ j)^n (x_j - x_k))
+  p(x) = sum_(j = 0)^n y_j l_j (x), quad l_j (x) = (∏_(k = 0, k ≠ j)^n (x - x_k)) / (∏_(k = 0, k ≠ j)^n (x_j - x_k))
 $
 
 其中，$y_j$ 是数据点的纵坐标。而 $l_j (x)$ 是拉格朗日基，即
@@ -198,7 +198,7 @@ $ <node>
 又，此前的约束条件为
 
 $
-  ∑_(i=0)^n ℓ_i (x) = 1
+  sum_(i=0)^n ℓ_i (x) = 1
 $ <constrain>
 
 == 质心公式
@@ -206,13 +206,13 @@ $ <constrain>
 联合之前的两个公式@node 和@constrain，可得
 
 $
-  P_n (x) = l(x) ∑_(j=0)^n y_j frac(w_j, x-x_j) = frac(l(x) ∑_(j=0)^n y_j frac(w_j, x-x_j), ∑_(j=0)^n ℓ_j (x)) = frac(l(x) ∑_(j=0)^n y_j frac(w_j, x-x_j), ∑_(j=0)^n w_j frac(l(x), x-x_j))
+  P_n (x) = l(x) sum_(j=0)^n y_j frac(w_j, x-x_j) = frac(l(x) sum_(j=0)^n y_j frac(w_j, x-x_j), sum_(j=0)^n ℓ_j (x)) = frac(l(x) sum_(j=0)^n y_j frac(w_j, x-x_j), sum_(j=0)^n w_j frac(l(x), x-x_j))
 $
 
 化简得
 
 $
-  P_n (x) = frac(∑_(j=0)^n frac(w_j, x-x_j) y_j, ∑_(j=0)^n frac(w_j, x-x_j))
+  P_n (x) = frac(sum_(j=0)^n frac(w_j, x-x_j) y_j, sum_(j=0)^n frac(w_j, x-x_j))
 $
 
 此公式被称为质心公式（barycentic formula）。其中，$w_j$不再随$x$变化，只算一次即可。即
