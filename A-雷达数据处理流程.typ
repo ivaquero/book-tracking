@@ -1,5 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
+#show: appendix-style.with(
   title: "雷达数据处理流程",
   info: info,
 )

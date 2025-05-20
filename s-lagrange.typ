@@ -1,11 +1,8 @@
 #import "lib/lib.typ": *
 #show: touying-quick.with(
   title: "拉格朗日插值在羊群追踪中的应用",
-  subtilte: "目标跟踪系列课程第1讲",
-  author: "主讲：杨鑫斌",
+  subtitle: "目标跟踪系列课程第1讲",
   author-size: 20pt,
-  institute: "能源与智能工程学院",
-  footer: "Henan University of Animal Husbandry and Economy",
   lang: "zh",
 )
 
