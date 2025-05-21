@@ -488,6 +488,5 @@
 #figure(
   tableq(data, 4),
   caption: "生词表",
-  supplement: "表",
   kind: table,
 )

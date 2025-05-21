@@ -321,7 +321,6 @@ $
     [$𝑷 = (𝑰 - 𝑲 𝑯) 𝑷$],
   ),
   caption: "Kalman 滤波的两种形式",
-  supplement: "表",
   kind: table,
 )
 

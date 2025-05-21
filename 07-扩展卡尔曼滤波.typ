@@ -93,7 +93,6 @@ $
     [$𝑷 = (𝑰 - 𝑲 𝒉_(𝑿)) 𝑷$],
   ),
   caption: "LKF vs. EKF",
-  supplement: "表",
   kind: table,
 )
 

@@ -12,7 +12,6 @@
 #figure(
   tableq(param, 4),
   caption: "基本估计方法",
-  supplement: "表",
   kind: table,
 )
 

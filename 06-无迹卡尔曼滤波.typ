@@ -310,7 +310,6 @@ $ hat(𝑿)_(k+1) = macron(𝑿)_(k) + 𝑲_(k+1) 𝒚_(k+1) $
     [$𝑷 = macron(𝑷) - 𝑲 𝑺 𝑲^⊤$],
   ),
   caption: "LKF vs. UKF",
-  supplement: "表",
   kind: table,
 )
 
