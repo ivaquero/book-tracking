@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "无迹 Kalman 滤波",
-  info: info,
-)
+#show: chapter-style.with(title: "无迹 Kalman 滤波", info: info)
 
 = 非线性问题
 <非线性问题>
@@ -84,18 +81,15 @@ UKF 的主要的缺点是，其速度可能比 EKF 慢几倍，但这实际上�
 
 若有两个点，就需要选择均值，然后再选择另外一个点。另外一个点会给我们的输入带来不对称，这可能是我们不希望看到的。对于恒等函数 $f(x) = x$来说，要做到这一点是非常困难的。3 个点允许我们选择均值，然后在均值两侧各选择一个点。
 
-#figure(
-  image("images/sigmas-3.png", width: 40%),
-  caption: "Sigmas",
-)
+#figure(image("images/sigmas-3.png", width: 40%), caption: "Sigmas")
 
 对于一个非常非线性的问题，我们可能希望中心点的权重远高于外围点，或者希望外围点的权重更高。一种通用的方法是计算加权均值$μ = sum_i w_i f(𝒳_i)$，其中，$𝒳_i$为 Sigma 点。若我们对均值$μ$进行加权，那么对协方差$Σ$进行加权也是合理的。于是有
 
 $
-  1 &= sum_i w_i^m\
-  1 &= sum_i w_i^c\
-  μ &= sum_i w_i^m f(𝒳_i)\
-  Σ &= sum_i w_i^c (f(𝒳)_i - μ) (f(𝒳)_i - μ)^⊤
+  1 & = sum_i w_i^m                             \
+  1 & = sum_i w_i^c                             \
+  μ & = sum_i w_i^m f(𝒳_i)                      \
+  Σ & = sum_i w_i^c (f(𝒳)_i - μ) (f(𝒳)_i - μ)^⊤
 $
 
 这些约束条件并不构成唯一的解。如，若将$w^m_0$ 变小，可通过将$w^m_1$ 和$w^m_2$ 变大来弥补。事实上，这些等式并不要求任一个点都是输入的均值。我们需要一种能满足这些约束条件的算法，最好每个维度只有 3 个点。
@@ -120,9 +114,9 @@ $
 $
   cases(
     delim: "{",
-    𝓧^0_k &= hat(𝑿)_k &i = 0,
-    𝓧^i_k &= hat(𝑿) + (sqrt((N +κ) 𝑷_k))_i quad &i = 1\, …\, N,
-    𝓧^i_k &= hat(𝑿) - (sqrt((N +κ) 𝑷_k))_(i-N) &i = N+1\, …\, 2N
+    𝓧^0_k & = hat(𝑿)_k & i = 0,
+    𝓧^i_k & = hat(𝑿) + (sqrt((N +κ) 𝑷_k))_i quad & i = 1\, …\, N,
+    𝓧^i_k & = hat(𝑿) - (sqrt((N +κ) 𝑷_k))_(i-N) & i = N+1\, …\, 2N
   )
 $
 

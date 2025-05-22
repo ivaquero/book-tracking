@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "一维 Kalman 滤波",
-  info: info,
-)
+#show: chapter-style.with(title: "一维 Kalman 滤波", info: info)
 
 = Kalman 滤波模型
 
@@ -13,15 +10,15 @@
 根据匀速运动模型，有
 
 $
-  hat(x)_(k) &= hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
-  hat(dot(x))_(k-1) &= hat(dot(x))_(k-1)
+         hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
+  hat(dot(x))_(k-1) & = hat(dot(x))_(k-1)
 $
 
 其协方差外推方程为
 
 $
-  p_(k|k-1)^x &= p_(k-1)^x + Δ t^2 p_(k-1)^v \
-  p_(k|k-1)^v &= p_(k-1)^v + q_k
+  p_(k|k-1)^x & = p_(k-1)^x + Δ t^2 p_(k-1)^v \
+  p_(k|k-1)^v & = p_(k-1)^v + q_k
 $
 
 其中，$p^x$和$p^v$分别是位置和速度的协方差，$q_k$过程噪声方差。
@@ -33,7 +30,7 @@ $
 为了估计系统的当前状态，我们结合 2 个随机变量，先验估计$hat(x)_(k|k-1)$和量测$z$。Kalman 滤波将先前的状态估计与量测相结合，以最大程度地减少当前状态估计的不确定性。当前状态估计是量测的加权平均值和先前的状态估计，即
 
 $
-  & hat(x)_(k) = w_1 z_k + w_2 hat(x)_(k|k-1)\
+  & hat(x)_(k) = w_1 z_k + w_2 hat(x)_(k|k-1) \
   & w_1 + w_2 = 1
 $
 
@@ -76,8 +73,8 @@ $ hat(x)_(k) = hat(x)_(k|k-1) + K_(k) (z_(k) - hat(x)_(k|k-1)) $ <st_up>
 将@st_up 代入@cov_up 可得
 
 $
-  p_(k) &= K_k^2 r_k + (1 - K_k)^2 p_(k|k-1)\
-  &= (1 - K_k)p_(k|k-1)
+  p_(k) & = K_k^2 r_k + (1 - K_k)^2 p_(k|k-1) \
+        & = (1 - K_k)p_(k|k-1)
 $
 
 此即为 Kalman 滤波的协方差更新方程。由于$(1 - K_k) ≤ 1$，可知
@@ -106,34 +103,28 @@ $
 
 == 初始化
 
-#block(
-  height: 5em,
-  columns(3)[
-    + 引入初值
-      - 初始估计状态：$hat(x)_0$
-      - 初始状态方差：$p_0$
-    + 拿到量测
-      - 量测：$z_k$
-      - 量测方差：$r_k$
-    + 预测
-  ],
-)
+#block(height: 5em, columns(3)[
+  + 引入初值
+    - 初始估计状态：$hat(x)_0$
+    - 初始状态方差：$p_0$
+  + 拿到量测
+    - 量测：$z_k$
+    - 量测方差：$r_k$
+  + 预测
+])
 
 == 状态更新
 
-#block(
-  height: 9em,
-  columns()[
-    - 输入
-      - 量测：$z_k$
-      - 量测方差：$r_k$
-      - 预测：$hat(x)_(k|k-1)$
-      - 预测方差：$p_(k|k-1)$
-    - 输出
-      - 估计：$hat(x)$
-      - 估计方差：$p_k$
-  ],
-)
+#block(height: 9em, columns()[
+  - 输入
+    - 量测：$z_k$
+    - 量测方差：$r_k$
+    - 预测：$hat(x)_(k|k-1)$
+    - 预测方差：$p_(k|k-1)$
+  - 输出
+    - 估计：$hat(x)$
+    - 估计方差：$p_k$
+])
 
 == 状态预测
 

@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "跟踪仿真",
-  info: info,
-)
+#show: chapter-style.with(title: "跟踪仿真", info: info)
 
 = 抛物
 <抛物>
@@ -19,10 +16,10 @@ $
 其中，$v_(x 0) = v cos(θ), v_(y 0) = v sin(θ)$。状态方程为
 
 $
-  x_t &= x_(t - 1) + v_(x(t - 1)) Δ t\
-  v_(x t) &= v_(x(t - 1))\
-  y_t &= y_(t - 1) + v_(y(t - 1)) Δ t\
-  v_(y t) &= - g Δ t + v_(y(t - 1))
+      x_t & = x_(t - 1) + v_(x(t - 1)) Δ t \
+  v_(x t) & = v_(x(t - 1))                 \
+      y_t & = y_(t - 1) + v_(y(t - 1)) Δ t \
+  v_(y t) & = - g Δ t + v_(y(t - 1))
 $
 
 === 状态变量与状态转移矩阵
@@ -118,8 +115,8 @@ $
 又由$F = m a$，可得
 
 $
-  a_x &= -B_2 / m v v_x\
-  a_y &= -B_2 / m v v_y
+  a_x & = -B_2 / m v v_x \
+  a_y & = -B_2 / m v v_y
 $
 
 Giordano 为$B_2 / m$提供了以下函数，其中考虑到了空气密度、物体横截面及其粗糙度。请注意，这是根据风洞试验和几个简化假设得出的近似值。它采用国际单位制：速度单位为米/秒，时间单位为秒。
@@ -128,10 +125,7 @@ $ B_2 / m = 0.0039 + frac(0.0058, 1 + exp[(v - 35) \/ 5]) $
 
 我们可以将 $"accel"∗∆t$ 纳入速度更新方程。我们应该减去这个分量，因为阻力会降低速度。由此可得到两种情况下的抛物线。
 
-#figure(
-  image("images/trk-parabola.png", width: 40%),
-  caption: "抛物运动",
-)
+#figure(image("images/trk-parabola.png", width: 40%), caption: "抛物运动")
 
 当加速度不够大，即非线性不够强时，可适当增加过程噪声，来避免使用非线性 KF。
 
@@ -161,10 +155,7 @@ $
   mat(delim: "[", x; dot(x); y)
 $
 
-#figure(
-  image("images/radar.png", width: 40%),
-  caption: "雷达示意图",
-)
+#figure(image("images/radar.png", width: 40%), caption: "雷达示意图")
 
 === EFK
 
@@ -177,7 +168,7 @@ $
 
 简写为
 
-$ dot(𝒙) &= 𝑨 𝒙 $
+$ dot(𝒙) & = 𝑨 𝒙 $
 
 由 Taylor 级数
 
@@ -272,10 +263,7 @@ $ 𝑹 = [σ^2_("range")] $
 
 近似地讲，汽车在向前行驶时通过转动前轮胎来转向。汽车前部沿着车轮指向的方向移动，同时绕后轮胎转动。这种简单的描述因摩擦导致的滑动、橡胶轮胎在不同速度下的不同行为以及外侧轮胎与内侧轮胎的行驶半径不同等问题而变得复杂。对转向进行精确建模需要一组复杂的微分方程。对于 KF，尤其是低速机器人应用，人们发现一个更简单的自行车模型性能良好。
 
-#figure(
-  image("images/model-bicycle.png", width: 40%),
-  caption: "自行车模型",
-)
+#figure(image("images/model-bicycle.png", width: 40%), caption: "自行车模型")
 
 这里可以看到前轮胎相对于轴距指向$α$方向。在很短的时间内，汽车向前行驶，后轮最终更靠前并略微向内转动，如蓝色阴影轮胎所示。在如此短的时间内，我们可以将其近似为绕半径$R$转弯。转动角为
 
@@ -288,16 +276,16 @@ $ R = d / β $
 其中，在前进速度为$v$的情况下，后轮行驶的距离为$d = v Δ t$。$θ$是机器人的方向，转弯开始前的位置 C 如下
 
 $
-  C_x &= x - R sin(θ)\
-  C_y &= y + R cos(θ)
+  C_x & = x - R sin(θ) \
+  C_y & = y + R cos(θ)
 $
 
 向前移动$Δ t$时间后，机器人的新位置和方向为
 
 $
-  macron(x) &= C_x + R sin(θ + β)\
-  macron(y) &= C_y - R cos(θ + β)\
-  macron(θ) &= θ + β
+  macron(x) & = C_x + R sin(θ + β) \
+  macron(y) & = C_y - R cos(θ + β) \
+  macron(θ) & = θ + β
 $
 
 == 系统模型
@@ -363,12 +351,11 @@ $ 𝑹 = mat(delim: "[", σ_("range")^2, 0; 0, σ_("bearing")^2) $
 
 需要注意的是，无迹变换计算的是状态向量和量测向量的均值，但每个向量都包含一个方位。计算一组角度的均值没有唯一的方法。例如，$359$和$3°$的均值是应该是$1°$，但经单方法却得到了$181°$。一种常见的方法是取正弦和余弦之和的反正弦。
 
-$ macron(θ) = "atan"2 (frac(sum_(i=1)^n sin θ_i, n), frac(sum_(i=1)^n cos θ_i, n)) $
+$
+  macron(θ) = "atan"2 (frac(sum_(i=1)^n sin θ_i, n), frac(sum_(i=1)^n cos θ_i, n))
+$
 
-#figure(
-  image("images/model-robot.png", width: 40%),
-  caption: "转弯机器人",
-)
+#figure(image("images/model-robot.png", width: 40%), caption: "转弯机器人")
 
 = 辅助知识
 

@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "随机 Kalman 滤波",
-  info: info,
-)
+#show: chapter-style.with(title: "随机 Kalman 滤波", info: info)
 
 = 集合 Kalman 滤波
 <EnKF>
@@ -30,8 +27,8 @@ $ 𝓧 ∼ 𝒩(𝒙_0, 𝑷_0) $
 我们首先使用提供的状态转移函数传递所有 Sigma 点，然后根据矩阵$𝑸$添加一些噪声，再通过 Sigma 点计算均值和协方差。即
 
 $
-  𝓧 &= f(𝒳, 𝒖) + 𝒗_𝑸\
-  𝒙 &= 1 / N sum_1^N 𝓧
+  𝓧 & = f(𝒳, 𝒖) + 𝒗_𝑸   \
+  𝒙 & = 1 / N sum_1^N 𝓧
 $
 
 现在我们可以选择计算均值的协方差。算法并不需要计算这个值，但它通常对分析很有用。方程为
@@ -45,29 +42,29 @@ $ 𝑷 = frac(1, N-1) sum_1^N [𝓧 - macron(𝒙)] [𝓧 - macron(𝒙)]^⊤ $
 将 Sigma 点通过量测函数$h$。我们将得到的点命名为$𝓧_h$，以区别于 Sigma 点。然后，计算量测 Sigma 点的均值。
 
 $
-  𝓧_h &= h(𝒳, u)\
-  macron(𝒛) &= 1 / N sum_1^N 𝓧_h
+        𝓧_h & = h(𝒳, u)           \
+  macron(𝒛) & = 1 / N sum_1^N 𝓧_h
 $
 
 现在我们可以计算每个量测 Sigma 点的协方差，以及量测 Sigma 点与 Sigma 点的交叉方差。这可以用以下两个等式表示
 
 $
-  𝑷_(𝒛) &= frac(1, N-1) sum_1^N [𝓧_h - macron(𝒛)][𝓧_h - macron(𝒛)]^⊤ + 𝑹\
-  𝑷_(𝒙 𝒛) &= frac(1, N-1) sum_1^N [𝒳 - 𝒙^-][𝓧_h - macron(𝒛)]^⊤
+    𝑷_(𝒛) & = frac(1, N-1) sum_1^N [𝓧_h - macron(𝒛)][𝓧_h - macron(𝒛)]^⊤ + 𝑹 \
+  𝑷_(𝒙 𝒛) & = frac(1, N-1) sum_1^N [𝒳 - 𝒙^-][𝓧_h - macron(𝒛)]^⊤
 $
 
 直接计算 Kalman 增益，然后更新 Sigma 点。
 
 $
-  𝑲 &= 𝑷_(𝒙 𝒛) 𝑷_(𝒛)^(-1)\
-  𝒳 &= 𝒳 + 𝑲[𝒛 - 𝓧_h + 𝒗_𝑹]
+  𝑲 & = 𝑷_(𝒙 𝒛) 𝑷_(𝒛)^(-1)   \
+  𝒳 & = 𝒳 + 𝑲[𝒛 - 𝓧_h + 𝒗_𝑹]
 $
 
 最后重新计算滤波的均值和协方差。
 
 $
-  𝒙 &= 1 / N sum_1^N 𝓧\
-  𝑷 &= 𝑷 - 𝑲 𝑷_(𝒛) 𝑲^⊤
+  𝒙 & = 1 / N sum_1^N 𝓧 \
+  𝑷 & = 𝑷 - 𝑲 𝑷_(𝒛) 𝑲^⊤
 $
 
 #tip[

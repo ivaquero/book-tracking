@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "机动目标跟踪",
-  info: info,
-)
+#show: chapter-style.with(title: "机动目标跟踪", info: info)
 
 = 自适应
 <自适应>
@@ -12,14 +9,8 @@
 不过，大量的噪声可以让我们更易地看到各种设计选择的效果。首先，让我们简化一下。x 坐标和 y 坐标是独立的，因此可以分别独立跟踪。现在，我们把$𝑸$增大
 
 #sgrid(
-  figure(
-    image("images/adkf-cv.png", width: 90%),
-    caption: "KF - CV",
-  ),
-  figure(
-    image("images/adkf-cv-q.png", width: 90%),
-    caption: "KF - CV + Q",
-  ),
+  figure(image("images/adkf-cv.png", width: 90%), caption: "KF - CV"),
+  figure(image("images/adkf-cv-q.png", width: 90%), caption: "KF - CV + Q"),
   columns: (200pt,) * 2,
   gutter: 2pt,
   caption: "KF - CV",
@@ -27,19 +18,13 @@
 
 CA 模型能够无滞后地跟踪机动，但代价是在稳态行为期间输出噪声非常大。产生噪声输出的原因是滤波无法区分操纵的开始和信号中的噪声。信号中的噪声意味着加速度，因此滤波的加速度项会跟踪它。CV 滤波无法在目标加速时迅速做出反应，而 CA 滤波却会将零加速状态下的噪声误解为加速度而非噪声。
 
-#figure(
-  image("images/adkf-ca.png", width: 40%),
-  caption: "KF - CA",
-)
+#figure(image("images/adkf-ca.png", width: 40%), caption: "KF - CA")
 
 == 识别机动
 
 一般来说，若物体的行为与 KF 使用的过程模型不同，我们就可以说该物体在 KF 方面发生了机动。对于滤波来说，机动物体的数学后果是什么？物体的行为与滤波的预测不同，因此残差会很大。
 
-#figure(
-  image("images/adaptive-residual.png", width: 50%),
-  caption: "残差图",
-)
+#figure(image("images/adaptive-residual.png", width: 50%), caption: "残差图")
 
 左图显示的是量测与 KF 最终输出之间的差异，而右图显示的是量测与过程模型预测之间的差异。这似乎是一个微妙的区别，但从图中可以看出并非如此。左图中机动开始时的偏差量很小，但右图中的偏差却说明了不同的情况。若被跟踪物体是按照过程模型运动的，那么残差图应该在 0.0 左右跳动。简单说，就是
 
@@ -63,19 +48,13 @@ $ ϵ = 𝒚^⊤𝑺^(-1)𝒚 ≈ 𝒚^2 / 𝑺 $
 
 $ 𝑺 = 𝑯 𝑷 𝑯^⊤ + 𝑹 $
 
-#figure(
-  image("images/adkf-residual.png", width: 40%),
-  caption: "新息",
-)
+#figure(image("images/adkf-residual.png", width: 40%), caption: "新息")
 
 上图图可以清楚地显示新息归一化的效果。对新息进行平方处理可确保信号始终大于$0$，而用了量测协方差对信号进行归一化处理，则可使我们区分新息相对于了量测噪声发生明显变化的时间。机动从$t = 3$秒开始，可以看到$ϵ$开始迅速增加。一旦$ϵ$超过某个极限，我们就需要将$𝑸$按比例放大，而一旦它再次低于该极限，我们又要将$𝑸$按比例缩小。
 
 一般来说，一旦$𝒚> 3σ$左右，我们就可以认为差异是由于实际变化而非噪声造成的。然而，传感器很少是真正的 Gaussian，因此在实际应用中会使用更大的数字，如$5σ~6σ$。
 
-#figure(
-  image("images/adkf-e.png", width: 40%),
-  caption: "ϵ = 4",
-)
+#figure(image("images/adkf-e.png", width: 40%), caption: "ϵ = 4")
 
 另一种非常相似的方法来自 Zarchan @zarchanProgressAstronauticsAeronautics2005a，它根据量测误差协方差的标准差设定限值，公式为
 
@@ -84,14 +63,8 @@ $ "std" = sqrt(𝑺) $
 若$|𝒚|$大于上述计算出的$"std"$的某个倍数，我们就会将$𝑸$增大一个固定值，然后继续计算。当$"std"$极限越小，速度的计算结果就越差。若改变滤波，一旦新息与预测值有轻微偏差，滤波就会优先考虑量测值而不是预测值，则我们很快就会将几乎所有权重都赋予量测值。若预测值没有权重，我们就没有信息来创建隐变量。因此，当极限值为$0.1 "std"$时，我们可以看到速度被量测中的噪声所淹没。另一方面，由于我们非常偏重量测，因此位置几乎完美地遵循了机动性。
 
 #sgrid(
-  figure(
-    image("images/adkf-zarchan-std.png", width: 90%),
-    caption: "标准差",
-  ),
-  figure(
-    image("images/adkf-zarchan-q.png", width: 90%),
-    caption: "Q 增量因子",
-  ),
+  figure(image("images/adkf-zarchan-std.png", width: 90%), caption: "标准差"),
+  figure(image("images/adkf-zarchan-q.png", width: 90%), caption: "Q 增量因子"),
   columns: (200pt,) * 2,
   gutter: 2pt,
   caption: "Zarchan 方法",
@@ -116,10 +89,7 @@ $ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^⊤ + 𝑸 $
   这里，若使用$α$，则我们计算的是$tilde(𝑷)$，而不是$macron(𝑷)$。
 ]
 
-#figure(
-  image("images/adkf-alpha.png", width: 40%),
-  caption: "α",
-)
+#figure(image("images/adkf-alpha.png", width: 40%), caption: "α")
 
 
 - 图 1 显示了 KF 的性能。滤波在机动开始时发散，直到 10 秒左右才重获信号。
@@ -167,8 +137,8 @@ $
 假设速度切线与水平的夹角为$φ$，则水平和垂直的分速度分别为$v_x = v cos φ, v_y = v sin φ$。由转角速率$ω = dv(φ, t)$，有
 
 $
-  dv(v_x, t) &= -&v sin φ dv(φ, t) &= -v_y ω\
-  dv(v_y, t) &= &v cos φ dv(φ, t) &= v_x ω
+  dv(v_x, t) & = - & v sin φ dv(φ, t) & = -v_y ω \
+  dv(v_y, t) & =   & v cos φ dv(φ, t) & = v_x ω
 $
 
 进而有

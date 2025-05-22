@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "常增益滤波",
-  info: info,
-)
+#show: chapter-style.with(title: "常增益滤波", info: info)
 
 = 铺垫与术语
 <铺垫与术语>
@@ -42,9 +39,17 @@ $
 #let font_size_annot = 8pt
 #let color_cond = rgb(150, 90, 170, 50)
 #pinit-highlight("s1", "s2", "s3", "s4", "s5", "s6", fill: color_stats)
-#pinit-place("s4", dx: -15pt, dy: 6pt)[#text("统计形式", font: "Kaiti SC", size: font_size_annot)]
+#pinit-place("s4", dx: -15pt, dy: 6pt)[#text(
+    "统计形式",
+    font: "Kaiti SC",
+    size: font_size_annot,
+  )]
 #pinit-highlight(7, 8, fill: color_cond)
-#pinit-place(7, dx: -2pt, dy: 6pt)[#text("条件形式", font: "Kaiti SC", size: font_size_annot)]
+#pinit-place(7, dx: -2pt, dy: 6pt)[#text(
+    "条件形式",
+    font: "Kaiti SC",
+    size: font_size_annot,
+  )]
 
 此方程被称为状态更新方程（state update equation）。这里，我们约定
 
@@ -60,7 +65,11 @@ $
 
 由上，状态更新方程可描述为
 
-#align(center, text("当前估计 = 预测 + 增益 × 新息", font: "Kaiti SC", size: 12pt))
+#align(center, text(
+  "当前估计 = 预测 + 增益 × 新息",
+  font: "Kaiti SC",
+  size: 12pt,
+))
 
 需要强调的是，估计值，又称滤波值，永远介于预测值和量测值之间，可以看着是一种利用加权平均的对量测进行平滑的手段。而这里的新息（innovation）即当前测量的残差，有时会使用$y$表示，即
 
@@ -78,15 +87,15 @@ $ hat(x)_(k) = hat(x)_(k|k-1) + α_(k) (z_(k) - hat(x)_(k|k-1)) $
 对一个匀速（constant velocity，CV）航行的飞行器，雷达以恒定频率向目标发射追踪波束，周期为$Δ t$，则飞行器距离雷达的距离$x$可表示为
 
 $
-  hat(x)_(k) &= hat(x)_(k-1) + Δ t hat(dot(x))_(k-1)\
-  hat(dot(x))_(k) &= hat(dot(x))_(k-1)
+       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
+  hat(dot(x))_(k) & = hat(dot(x))_(k-1)
 $
 
 上述方程被称为状态外推方程（state extrapolation equation）或预测方程。又由于动态（时变）过程必然带来噪声，即过程噪声（process noise）。引入过程噪声后，上述两式表示为
 
 $
-  hat(x)_(k) &= hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
-  hat(dot(x))_(k) &= hat(dot(x))_(k-1)
+       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
+  hat(dot(x))_(k) & = hat(dot(x))_(k-1)
 $
 
 == α-β 滤波
@@ -94,16 +103,13 @@ $
 由于仅依赖状态外推方程并不能得到准确的$hat(x)$，此时还需要位置和速度的状态更新方程，分别对$hat(x)$和$hat(dot(x))$进行校正，即
 
 $
-  hat(x)_(k) &= hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))\
-  hat(dot(x))_(k) &= hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))
+       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))               \
+  hat(dot(x))_(k) & = hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))
 $
 
 此即是 α-β 滤波，又称 g-h 滤波。
 
-#figure(
-  image("images/gh-cv.png", width: 70%),
-  caption: "匀速模型",
-)
+#figure(image("images/gh-cv.png", width: 70%), caption: "匀速模型")
 
 == 噪声与增益
 
@@ -127,21 +133,12 @@ $
 
 其中，$α$和$β$分别从$k=1$和$k=2$开始计算，滤波从$k=3$开始工作。
 
-#align(
-  center,
-  stack(
-    dir: ltr,
-    spacing: -2em,
-    figure(
-      image("images/gh-g.png", width: 60%),
-      caption: "变化的 α（g）",
-    ),
-    figure(
-      image("images/gh-h.png", width: 60%),
-      caption: "变化的 β（h）",
-    ),
-  ),
-)
+#align(center, stack(
+  dir: ltr,
+  spacing: -2em,
+  figure(image("images/gh-g.png", width: 60%), caption: "变化的 α（g）"),
+  figure(image("images/gh-h.png", width: 60%), caption: "变化的 β（h）"),
+))
 
 由上不难看出，$α$控制着滤波的精度，$β$控制着滤波响应时间，后者与雷达精度呈正相关。
 

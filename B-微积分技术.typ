@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: appendix-style.with(
-  title: "微积分技术",
-  info: info,
-)
+#show: appendix-style.with(title: "微积分技术", info: info)
 
 = 插值
 
@@ -82,9 +79,9 @@ $ w_j = frac(1, l′(x_j)) $
 利用留数定理可得
 
 $
-  l_i (x) &= frac(l(x), l′(x_i)(x - x_j))\
-  &= l(x) "Res"(frac(1, l(t)(x - t)); t = x_i)\
-  &= frac(1, 2π i) ∫_(Γ_j) frac(1, l(t)(x - t)) dd(t)
+  l_i (x) & = frac(l(x), l′(x_i)(x - x_j))                     \
+          & = l(x) "Res"(frac(1, l(t)(x - t)); t = x_i)        \
+          & = frac(1, 2π i) ∫_(Γ_j) frac(1, l(t)(x - t)) dd(t)
 $
 
 其中，$Γ_j$为只包围节点$x_j$的正向闭合曲线。进而有
@@ -99,7 +96,9 @@ $ "Res"(frac(l(x) f(t), l(t)(x - t)); t = x) = - f(x) $
 
 于是可得，Hermite 积分公式
 
-$ f(x) - p(x) = frac(1, 2π i) ∫_(Γ_j) frac(l(x)f(t), l(t)(t - x)) dd(t) $ <hermite_int>
+$
+  f(x) - p(x) = frac(1, 2π i) ∫_(Γ_j) frac(l(x)f(t), l(t)(t - x)) dd(t)
+$ <hermite_int>
 
 这里的$Γ$在$Γ′$的基础上，还包括了待估计点$x$。其告诉我们，$f(x)$的解析区域越大，插值收敛越快。
 

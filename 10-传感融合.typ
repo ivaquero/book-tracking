@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "传感融合",
-  info: info,
-)
+#show: chapter-style.with(title: "传感融合", info: info)
 #import "@local/consketcher:0.1.0": *
 
 = 铺垫
@@ -35,15 +32,12 @@
 #theorem[
   $n$个$k$元 Gaussian 分布的积分布的参数为
   $
-    & 𝜮_(N)^(-1) = sum_(i=1)^n 𝜮_i^(-1)\
+    & 𝜮_(N)^(-1) = sum_(i=1)^n 𝜮_i^(-1)    \
     & 𝝁_(N) = 𝜮 sum_(i=1)^n (𝜮_i^(-1) 𝝁_i)
   $
 ]
 
-#figure(
-  image("images/fusion-radar.png", width: 40%),
-  caption: "两站雷达融合",
-)
+#figure(image("images/fusion-radar.png", width: 40%), caption: "两站雷达融合")
 
 = 常用策略
 
@@ -88,11 +82,7 @@
   arrow(input2, fusion, ""),
 )
 
-#figure(
-  fusion_measure,
-
-  caption: "量测融合",
-)
+#figure(fusion_measure, caption: "量测融合")
 
 对$𝒛_k^1, ..., 𝒛_k^k$有协方差$𝑹_k^1, ..., 𝑹_k^k$。假设正态分布的量测值 PDF，可以计算联合 PDF
 
@@ -174,11 +164,7 @@ $
   arrow(fusion_status, fusion, $hat(𝒙)_k$),
 )
 
-#figure(
-  fusion_status,
-
-  caption: "状态融合",
-)
+#figure(fusion_status, caption: "状态融合")
 
 当两个轨迹估计之间的互协方差可以忽略时，状态融合涉及两个随机变量$hat(𝒙)_k^1$和$hat(𝒙)_k^2$的简单融合，其对应的协方差矩阵是
 
@@ -202,8 +188,8 @@ $
 其中，$𝑷_k^((12)) = (𝑷_k^((21)))^⊤$为$hat(𝒙)_k^1$和$hat(𝒙)_k^2$间的协方差，其计算公式为
 
 $
-  𝑷_(k)^((12)) = &(𝑰 - 𝑲_n^(1) 𝑯^(1)) 𝑭 𝑷_(k|k-1)^(12) 𝑭^T (𝑰 - 𝑲_n^(2) 𝑯^(2))^T\
-  + &(𝑰 - 𝑲_n^(1) 𝑯^(1)) 𝑮 𝑸 𝑮^T (𝑰 - 𝑲_n^(2) 𝑯^(2))^T
+  𝑷_(k)^((12)) = & (𝑰 - 𝑲_n^(1) 𝑯^(1)) 𝑭 𝑷_(k|k-1)^(12) 𝑭^T (𝑰 - 𝑲_n^(2) 𝑯^(2))^T \
+               + & (𝑰 - 𝑲_n^(1) 𝑯^(1)) 𝑮 𝑸 𝑮^T (𝑰 - 𝑲_n^(2) 𝑯^(2))^T
 $
 
 有研究表明@bar-shalomEffectCommonProcess1986，当考虑到这种依赖性时，不确定性椭圆的面积会减少 70%，而独立噪声假设正确时只会减少 50%。

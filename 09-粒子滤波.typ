@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "粒子滤波",
-  info: info,
-)
+#show: chapter-style.with(title: "粒子滤波", info: info)
 
 = 滤波模型
 <滤波模型>

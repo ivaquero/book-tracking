@@ -1,19 +1,12 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "参数估计",
-  info: info,
-)
+#show: chapter-style.with(title: "参数估计", info: info)
 
 = 基本估计方法
 
 按照估计所采用的准则，参数估计包括 4 种基本估计，即最大后验估计（MAPE）、最大似然估计（MLE）、最小均方误差估计（MMSE）和最小二乘估计（LSE）。前两者属于基于概率视角，后两者基于优化视角。其使用的先决条件各不相同，具体如下表所示
 
 #let param = csv("data/term-estmation.csv")
-#figure(
-  tableq(param, 4),
-  caption: "基本估计方法",
-  kind: table,
-)
+#figure(tableq(param, 4), caption: "基本估计方法", kind: table)
 
 == 概率视角
 
@@ -82,10 +75,10 @@ $ ℒ(𝒙) = sum_(i=1)^n norm(𝒙^⊤ z_i - y_i)_2^2 $
 展开得
 
 $
-  ℒ(𝒙) &= (𝒙^⊤ z_1 - y_1, …, 𝒙^⊤ z_N - y_N)⋅(𝒙^⊤ z_1 - y_1, …, 𝒙^⊤ z_N - y_N)^⊤\
-  &= (𝒙^⊤ 𝒁^⊤ - 𝒀^⊤)⋅(𝒁 𝒙 - 𝒀)\
-  &= 𝒙^⊤ 𝒁^⊤ 𝒁 𝒙 - 𝒀^⊤ 𝒁 𝒙 - 𝒙^⊤ 𝒁^⊤ 𝒀 + 𝒀^⊤ 𝒀\
-  &= 𝒙^⊤ 𝒁^⊤ 𝒁 𝒙 - 2 𝒙^⊤ 𝒁^⊤ 𝒀 + 𝒀^⊤ 𝒀
+  ℒ(𝒙) & = (𝒙^⊤ z_1 - y_1, …, 𝒙^⊤ z_N - y_N)⋅(𝒙^⊤ z_1 - y_1, …, 𝒙^⊤ z_N - y_N)^⊤ \
+       & = (𝒙^⊤ 𝒁^⊤ - 𝒀^⊤)⋅(𝒁 𝒙 - 𝒀)                                             \
+       & = 𝒙^⊤ 𝒁^⊤ 𝒁 𝒙 - 𝒀^⊤ 𝒁 𝒙 - 𝒙^⊤ 𝒁^⊤ 𝒀 + 𝒀^⊤ 𝒀                             \
+       & = 𝒙^⊤ 𝒁^⊤ 𝒁 𝒙 - 2 𝒙^⊤ 𝒁^⊤ 𝒀 + 𝒀^⊤ 𝒀
 $
 
 最小化这个值的$hat(𝒙)$
@@ -149,7 +142,7 @@ $ 𝒁 = (z_1, z_2, …, z_N)^⊤, 𝒀 = (y_1, y_2, …, y_N)^⊤ $
 
 在 MLE 中
 
-$ 𝒙_("MLE") &= arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 med sum_(i=1)^N log p(z_i|𝒙) $
+$ 𝒙_("MLE") & = arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 med sum_(i=1)^N log p(z_i|𝒙) $
 
 考虑 Gaussian 分布的 PDF，代入似然函数，有
 
@@ -172,7 +165,9 @@ $
 
 对$σ$的极值，有
 
-$ σ_("MLE") &= arg min_σ med sum_(i=1)^N [- log σ - frac(1, 2 σ^2)(z_i - μ)^2] $
+$
+  σ_("MLE") & = arg min_σ med sum_(i=1)^N [- log σ - frac(1, 2 σ^2)(z_i - μ)^2]
+$
 
 于是
 
@@ -185,11 +180,10 @@ $
 取先验分布 $𝒙 ∼ 𝒩(0, σ_0^2)$。于是
 
 $
-  hat(𝒙)
-  &= arg max_𝒙 med p(𝒁|𝒙) p(𝒙)\
-  &= arg max_𝒙 med log p(𝒁|𝒙) p(𝒙)\
-  &= arg max_𝒙 med (log p(𝒁|𝒙) + log p(𝒙))\
-  &= arg min_𝒙 med [(y - 𝒙^⊤ 𝒛)^2 + σ^2 / σ_0^2 𝒙^⊤ w]
+  hat(𝒙) & = arg max_𝒙 med p(𝒁|𝒙) p(𝒙)                         \
+         & = arg max_𝒙 med log p(𝒁|𝒙) p(𝒙)                     \
+         & = arg max_𝒙 med (log p(𝒁|𝒙) + log p(𝒙))             \
+         & = arg min_𝒙 med [(y - 𝒙^⊤ 𝒛)^2 + σ^2 / σ_0^2 𝒙^⊤ w]
 $
 
 这里利用了 Gaussian 分布的 MLE 的结果。
