@@ -52,11 +52,14 @@ $
 
 此方程被称为状态更新方程（state update equation）。于是，状态更新方程可描述为
 
-#align(center, text(
-  "当前估计 = 预测 + 增益 × 新息",
-  font: "Kaiti SC",
-  size: 20pt,
-))
+#align(
+  center,
+  text(
+    "当前估计 = 预测 + 增益 × 新息",
+    font: "Kaiti SC",
+    size: 20pt,
+  ),
+)
 
 需要强调的是，估计值，又称滤波值，永远介于预测值和量测值之间，可以看着是一种利用加权平均的对量测进行平滑的手段。而这里的新息（innovation）即当前测量的残差，有时会使用$y$表示，即
 
@@ -73,14 +76,14 @@ $ hat(x)_(k) = hat(x)_(k|k-1) + α_(k) (z_(k) - hat(x)_(k|k-1)) $
 对一个匀速（constant velocity，CV）航行的飞行器，雷达以恒定频率向目标发射追踪波束，周期为$Δ t$，则飞行器距离雷达的距离$x$可表示为
 
 $
-       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
+  hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
   hat(dot(x))_(k) & = hat(dot(x))_(k-1)
 $
 
 上述方程被称为状态外推方程（state extrapolation equation）或预测方程。又由于动态（时变）过程必然带来噪声，即过程噪声（process noise）。引入过程噪声后，上述两式表示为
 
 $
-       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
+  hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
   hat(dot(x))_(k) & = hat(dot(x))_(k-1)
 $
 
@@ -89,7 +92,7 @@ $
 由于仅依赖状态外推方程并不能得到准确的$hat(x)$，此时还需要位置和速度的状态更新方程，分别对$hat(x)$和$hat(dot(x))$进行校正，即
 
 $
-       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))               \
+  hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1)) \
   hat(dot(x))_(k) & = hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))
 $
 
@@ -99,12 +102,15 @@ $
 
 == 增益的影响
 
-#align(center, stack(
-  dir: ltr,
-  spacing: 2em,
-  figure(image("images/gh-g.png", width: 50%), caption: "变化的 α（g）"),
-  figure(image("images/gh-h.png", width: 50%), caption: "变化的 β（h）"),
-))
+#align(
+  center,
+  stack(
+    dir: ltr,
+    spacing: 2em,
+    figure(image("images/gh-g.png", width: 50%), caption: "变化的 α（g）"),
+    figure(image("images/gh-h.png", width: 50%), caption: "变化的 β（h）"),
+  ),
+)
 
 由上不难看出，$α$控制着滤波的精度，$β$控制着滤波响应时间，后者与雷达精度呈正相关。
 
@@ -131,36 +137,43 @@ $
 == Kalman 滤波流程
 
 #set list(indent: -1.2em)
-#block(height: 15em, width: 90%, columns(3)[
-  - 初始化
-    + 获取
-      - 初始估计状态：$hat(x)_0$
-      - 初始状态方差：$p_0$
-      - 量测：$z_k$
-      - 量测方差：$r_k$
-    + 状态预测
-      - 预测：$hat(x)_(k|k-1)$
-      - 预测方差：$p_(k|k-1)$
+#block(
+  height: 15em,
+  width: 90%,
+  columns(3)[
+    - 初始化
+      + 获取
+        - 初始估计状态：$hat(x)_0$
+        - 初始状态方差：$p_0$
+        - 量测：$z_k$
+        - 量测方差：$r_k$
+      + 状态预测
+        - 预测：$hat(x)_(k|k-1)$
+        - 预测方差：$p_(k|k-1)$
 
-  - 状态更新
-    + 获取
-      - 量测及其方差：$z_k$
-      - 量测方差：$r_k$
-      - 预测：$hat(x)_(k|k-1)$
-      - 预测方差：$p_(k|k-1)$
-    + 状态预测
-      - 估计：$hat(x)_k$
-      - 估计方差：$p_k$
+    - 状态更新
+      + 获取
+        - 量测及其方差：$z_k$
+        - 量测方差：$r_k$
+        - 预测：$hat(x)_(k|k-1)$
+        - 预测方差：$p_(k|k-1)$
+      + 状态预测
+        - 估计：$hat(x)_k$
+        - 估计方差：$p_k$
 
-  #image("docs/kalman.drawio.png", width: 160%)
-])
+    #image("docs/kalman.drawio.png", width: 160%)
+  ],
+)
 
 == 后续
 
-#block(height: 9em, columns(gutter: .1em)[
-  - Kalman 滤波的多维推广
-  - Kalman 滤波代码实现
-  链接: https://ivaquero.github.io/blog-filters
+#block(
+  height: 9em,
+  columns(gutter: .1em)[
+    - Kalman 滤波的多维推广
+    - Kalman 滤波代码实现
+    链接: https://ivaquero.github.io/blog-filters
 
-  #image("tut.png", height: 125%, width: 100%)
-])
+    #image("tut.png", height: 125%, width: 100%)
+  ],
+)
