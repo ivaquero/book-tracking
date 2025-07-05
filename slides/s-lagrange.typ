@@ -1,4 +1,4 @@
-#import "lib/lib.typ": *
+#import "../lib/lib.typ": *
 #show: touying-quick.with(
   title: "拉格朗日插值在羊群追踪中的应用",
   subtitle: "目标跟踪系列课程第1讲",
@@ -22,7 +22,7 @@
     - *插值（interpolation）*
     - 外推（extrapolation）
   #figure(
-    image("slides/grid.png", width: 100%),
+    image("img/grid.png", width: 100%),
     // caption: "动物的运动轨迹",
   )
 ])
@@ -39,7 +39,7 @@
   $ y = a_0 + a_1x + a_2x^2 + a_3x^3 + a_4x^4 $
 
   其中，$a_0, a_1, a_2, a_3, a_4$ 是待定系数。
-  #figure(image("slides/interp-lagrange-5.png", width: 90%), caption: none)
+  #figure(image("img/interp-lagrange-5.png", width: 90%), caption: none)
 ])
 
 #tip(title: text("辅助软件", fill: black))[
@@ -51,7 +51,7 @@
 将给定的5个点代入上式，得到一个方程组，将其表示为一个矩阵，即 Vandermonde 矩阵。
 
 #set math.equation(numbering: none)
-#let lagrange = csv("slides/lagrange.csv")
+#let lagrange = csv("img/lagrange.csv")
 
 #figure(
   tableq(lagrange, 6),
@@ -98,8 +98,8 @@ $
 将数据点分别带入，类推得到5个拉格朗日基。
 
 $
-  l_0(x) &= ((x + 2)(x)(x - 1)(x - 3)) / ((-3 + 2)(-3)(-3 - 1)(-3 - 3)), quad
-  l_1(x) &= ((x + 3)(x)(x - 1)(x - 3)) / ((-2 + 3)(-2)(-2 - 1)(-2 - 3)), quad ...
+  l_0(x) & = ((x + 2)(x)(x - 1)(x - 3)) / ((-3 + 2)(-3)(-3 - 1)(-3 - 3)), quad
+           l_1(x) & = ((x + 3)(x)(x - 1)(x - 3)) / ((-2 + 3)(-2)(-2 - 1)(-2 - 3)), quad ...
 $
 
 #figure(
@@ -113,15 +113,15 @@ $
 
 #sgrid(
   figure(
-    image("slides/interp-lagrange-51.png", width: 100%),
+    image("img/interp-lagrange-51.png", width: 100%),
     caption: "拉格朗日基1",
   ),
   figure(
-    image("slides/interp-lagrange-52.png", width: 100%),
+    image("img/interp-lagrange-52.png", width: 100%),
     caption: "拉格朗日基2",
   ),
   figure(
-    image("slides/interp-lagrange-53.png", width: 100%),
+    image("img/interp-lagrange-53.png", width: 100%),
     caption: "拉格朗日基3",
   ),
   columns: (200pt,) * 3,
@@ -131,11 +131,11 @@ $
 
 #sgrid(
   figure(
-    image("slides/interp-lagrange-54.png", width: 100%),
+    image("img/interp-lagrange-54.png", width: 100%),
     caption: "拉格朗日基4",
   ),
   figure(
-    image("slides/interp-lagrange-55.png", width: 100%),
+    image("img/interp-lagrange-55.png", width: 100%),
     caption: "拉格朗日基5",
   ),
   columns: (200pt,) * 2,
@@ -155,15 +155,15 @@ $
 
 #sgrid(
   figure(
-    image("slides/interp-lagrange-5x1.png", width: 100%),
+    image("img/interp-lagrange-5x1.png", width: 100%),
     caption: "基函数1+2",
   ),
   figure(
-    image("slides/interp-lagrange-5x2.png", width: 100%),
+    image("img/interp-lagrange-5x2.png", width: 100%),
     caption: "基函数1+2+3+4",
   ),
   figure(
-    image("slides/interp-lagrange-5y.png", width: 100%),
+    image("img/interp-lagrange-5y.png", width: 100%),
     caption: "插值多项式",
   ),
   columns: (240pt,) * 3,
@@ -221,7 +221,7 @@ $
   + 代入数据点横坐标$x_i$，计算各基函数权重$l_j$
   + 代入数据点纵坐标$y_i$，计算插值多项式
 
-  #figure(image("slides/interp-lagrange-5yy.png", width: 100%), caption: none)
+  #figure(image("img/interp-lagrange-5yy.png", width: 100%), caption: none)
 ])
 
 == 主要意义
@@ -237,5 +237,5 @@ $
   - 常见问题与解决方案
   \
 
-  #figure(image("slides/py.png", width: 90%), caption: none)
+  #figure(image("img/py.png", width: 90%), caption: none)
 ])
