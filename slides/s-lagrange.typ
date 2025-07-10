@@ -2,7 +2,6 @@
 #show: touying-quick.with(
   title: "拉格朗日插值在羊群追踪中的应用",
   subtitle: "目标跟踪系列课程第1讲",
-  author-size: 20pt,
   info: slide,
   lang: "zh",
 )

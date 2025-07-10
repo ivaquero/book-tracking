@@ -2,7 +2,6 @@
 #show: touying-quick.with(
   title: "常增益滤波",
   subtitle: "Kalman 滤波系列课程第1讲",
-  author-size: 20pt,
   info: slide,
   lang: "zh",
 )
@@ -149,7 +148,7 @@ $
       - 估计：$hat(x)_k$
       - 估计方差：$p_k$
 
-  #image("../docs/kalman.drawio.png", width: 160%)
+  #image("img/kalman.drawio.png", width: 160%)
 ])
 
 == 后续
