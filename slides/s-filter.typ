@@ -1,4 +1,4 @@
-#import "../lib/lib.typ": *
+#import "../lib/slides.typ": *
 #show: touying-quick.with(
   title: "常增益滤波",
   subtitle: "Kalman 滤波系列课程第1讲",
