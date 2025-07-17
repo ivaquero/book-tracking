@@ -162,8 +162,8 @@ $
 由于变量$x$和$y$是相互独立的，对于$𝑭$，我们可以将其切分后进行计算，即
 
 $
-  mat(delim: "[", dot(x); dot.double(x)) &=
-  mat(delim: "[", 0, 1; 0, 0) mat(delim: "[", x; dot(x))
+  mat(delim: "[", dot(x); dot.double(x)) & =
+                                           mat(delim: "[", 0, 1; 0, 0) mat(delim: "[", x; dot(x))
 $
 
 简写为
