@@ -79,8 +79,8 @@ $ w_j = frac(1, l′(x_j)) $
 利用留数定理可得
 
 $
-  l_i (x) & = frac(l(x), l′(x_i)(x - x_j))                     \
-          & = l(x) "Res"(frac(1, l(t)(x - t)); t = x_i)        \
+  l_i (x) & = frac(l(x), l′(x_i)(x - x_j)) \
+          & = l(x) "Res"(frac(1, l(t)(x - t)); t = x_i) \
           & = frac(1, 2π i) ∫_(Γ_j) frac(1, l(t)(x - t)) dd(t)
 $
 
@@ -123,9 +123,9 @@ $ x_i = -1 + (i - 1)frac(2, n),quad i ∈ {1, 2, ⋯ , n+1} $
 为确定函数的收敛性，根据@hermite_int，我们只需要关心式中唯一随$x$变化的因子
 
 $
-  frac(l(x), l(t)) &= lr(|frac((x - x_0) ⋯ (x - x_n), (t - x_0) ⋯ (t - x_n))|) \
-  &= (frac(root(n + 1, |x - x_0| ⋯ |x - x_n|), root(n + 1, |t - x_0| ⋯ |t - x_n|)))^(n + 1) \
-  &= frac(x ctext("到各节点的几何平均距离"), t #ctext("到各节点的几何平均距离"))
+  frac(l(x), l(t)) & = lr(|frac((x - x_0) ⋯ (x - x_n), (t - x_0) ⋯ (t - x_n))|) \
+                   & = (frac(root(n + 1, |x - x_0| ⋯ |x - x_n|), root(n + 1, |t - x_0| ⋯ |t - x_n|)))^(n + 1) \
+                   & = frac(x ctext("到各节点的几何平均距离"), t #ctext("到各节点的几何平均距离"))
 $
 
 当$Γ$的解析区域足够大，则可使$t$比$x$均值离节点更远，从而使上述等式以指数级递减，并趋于$0$，即$P_n(x)$收至$f(x)$。

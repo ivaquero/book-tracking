@@ -40,16 +40,16 @@ $
 #let color_cond = rgb(150, 90, 170, 50)
 #pinit-highlight("s1", "s2", "s3", "s4", "s5", "s6", fill: color_stats)
 #pinit-place("s4", dx: -15pt, dy: 6pt)[#text(
-    "统计形式",
-    font: "Kaiti SC",
-    size: font_size_annot,
-  )]
+  "统计形式",
+  font: "Kaiti SC",
+  size: font_size_annot,
+)]
 #pinit-highlight(7, 8, fill: color_cond)
 #pinit-place(7, dx: -2pt, dy: 6pt)[#text(
-    "条件形式",
-    font: "Kaiti SC",
-    size: font_size_annot,
-  )]
+  "条件形式",
+  font: "Kaiti SC",
+  size: font_size_annot,
+)]
 
 此方程被称为状态更新方程（state update equation）。这里，我们约定
 
@@ -103,7 +103,7 @@ $
 由于仅依赖状态外推方程并不能得到准确的$hat(x)$，此时还需要位置和速度的状态更新方程，分别对$hat(x)$和$hat(dot(x))$进行校正，即
 
 $
-       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))               \
+       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1)) \
   hat(dot(x))_(k) & = hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))
 $
 
@@ -150,23 +150,17 @@ $
 对一个匀加速（constant acceleration，CA）航行的飞行器，类比 CV 模型，有
 
 $
-  hat(x)_(k|k-1)
-  &= hat(x)_(k) + hat(dot(x))_(k) Δ t + hat(dot.double(x))_(k) frac(Δ t^2, 2)\
-  hat(dot(x))_(k|k-1)
-  &= hat(dot(x))_(k) + hat(dot.double(x))_(k) Δ t\
-  hat(dot.double(x))_(k|k-1)
-  &= hat(dot.double(x))_(k)
+              hat(x)_(k|k-1) & = hat(x)_(k) + hat(dot(x))_(k) Δ t + hat(dot.double(x))_(k) frac(Δ t^2, 2) \
+         hat(dot(x))_(k|k-1) & = hat(dot(x))_(k) + hat(dot.double(x))_(k) Δ t \
+  hat(dot.double(x))_(k|k-1) & = hat(dot.double(x))_(k)
 $
 
 化为递归形式，可得
 
 $
-  hat(x)_(k)
-  &= hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))\
-  hat(dot(x))_(k)
-  &= hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))\
-  hat(dot.double(x))_(k)
-  &= hat(dot.double(x))_(k-1) + γ (frac(z_(k) - hat(x)_(k|k-1), 0.5 Δ t^2))
+              hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1)) \
+         hat(dot(x))_(k) & = hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t)) \
+  hat(dot.double(x))_(k) & = hat(dot.double(x))_(k-1) + γ (frac(z_(k) - hat(x)_(k|k-1), 0.5 Δ t^2))
 $
 
 此即是 α-β-γ 滤波，又称 g-h-k 滤波。其中，其增益和机动目标指数的关系为
