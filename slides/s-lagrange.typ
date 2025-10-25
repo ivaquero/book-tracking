@@ -22,7 +22,8 @@
     - 外推（extrapolation）
   #figure(
     image("img/grid.png", width: 100%),
-    // caption: "动物的运动轨迹",
+    caption: "动物的运动轨迹",
+    supplement: none,
   )
 ])
 
