@@ -28,28 +28,13 @@ $
 对一个人的身高，进行多次量测，可写成递归形式
 
 $
-  hat(x)_(k)
-  &= 1 / k (z_(1) + z_(2) + … + z_(k-1) + z_(k))\
-  &= (k-1) / k (#pin("s1")1#pin("s2")) / (#pin("s3")k-1#pin("s4")) #pin("s5")sum_(i=1)^(k-1) z_(i)#pin("s6") + 1 / k z_(k)\
-  &= (k-1) / k #pin(7)hat(x)_(k|k-1)#pin(8) + 1 / k z_(k)\
-  &= hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
+  hat(x)_(k) & = 1 / k (z_(1) + z_(2) + … + z_(k-1) + z_(k)) \
+  & = (k-1) / k markhl(1 / (k-1) sum_(i=1)^(k-1) z_(i), fill: #rgb(0, 180, 255, 50), tag: #<stats>) + 1 / k z_(k) \
+  & = (k-1) / k markhl(hat(x)_(k|k-1), fill: #rgb(150, 90, 170, 50), tag: #<cond>) + 1 / k z_(k) \
+  & = hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
+  #annot(<stats>)[#text("统计形式", font: "Kaiti SC")]
+  #annot(<cond>)[#text("条件形式", font: "Kaiti SC")]
 $
-
-#let color_stats = rgb(0, 180, 255, 50)
-#let font_size_annot = 8pt
-#let color_cond = rgb(150, 90, 170, 50)
-#pinit-highlight("s1", "s2", "s3", "s4", "s5", "s6", fill: color_stats)
-#pinit-place("s4", dx: -15pt, dy: 6pt)[#text(
-  "统计形式",
-  font: "Kaiti SC",
-  size: font_size_annot,
-)]
-#pinit-highlight(7, 8, fill: color_cond)
-#pinit-place(7, dx: -2pt, dy: 6pt)[#text(
-  "条件形式",
-  font: "Kaiti SC",
-  size: font_size_annot,
-)]
 
 此方程被称为状态更新方程（state update equation）。这里，我们约定
 

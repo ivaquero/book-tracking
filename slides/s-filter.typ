@@ -21,8 +21,8 @@
 
 $
   cases(
-    x = x_0 + v_(x 0) Δ t + 1 / 2 a_x Δ t^2\
-    y = y_0 + v_(y 0) Δ t + 1 / 2 a_y Δ t^2\
+    x = x_0 + v_(x 0) Δ t + 1 / 2 a_x Δ t^2,
+    y = y_0 + v_(y 0) Δ t + 1 / 2 a_y Δ t^2,
     z = z_0 + v_(z 0) Δ t + 1 / 2 a_z Δ t^2
   )
 $
@@ -34,20 +34,13 @@ $
 对一个人的身高，进行多次量测，可写成递归形式
 
 $
-  hat(x)_(k)
-  &= 1 / k (z_(1) + z_(2) + … + z_(k-1) + z_(k))\
-  &= (k-1) / k (#pin("s1")1#pin("s2")) / (#pin("s3")k-1#pin("s4")) #pin("s5")sum_(i=1)^(k-1) z_(i)#pin("s6") + 1 / k z_(k)\
-  &= (k-1) / k #pin(7)hat(x)_(k|k-1)#pin(8) + 1 / k z_(k)\
-  &= hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
+  hat(x)_(k) & = 1 / k (z_(1) + z_(2) + … + z_(k-1) + z_(k)) \
+  & = (k-1) / k markhl(1 / (k-1) sum_(i=1)^(k-1) z_(i), fill: #rgb(0, 180, 255, 50), tag: #<stats>) + 1 / k z_(k) \
+  & = (k-1) / k markhl(hat(x)_(k|k-1), fill: #rgb(150, 90, 170, 50), tag: #<cond>) + 1 / k z_(k) \
+  & = hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
+  #annot(<stats>)[#text("统计形式", font: "Kaiti SC")]
+  #annot(<cond>)[#text("条件形式", font: "Kaiti SC")]
 $
-
-#let color_stats = rgb(0, 180, 255, 50)
-#let font_size_annot = 8pt
-#let color_cond = rgb(150, 90, 170, 50)
-#pinit-highlight("s1", "s2", "s3", "s4", "s5", "s6", fill: color_stats)
-#pinit-place("s4", dx: -15pt, dy: 6pt)[]
-#pinit-highlight(7, 8, fill: color_cond)
-#pinit-place(7, dx: -2pt, dy: 6pt)[]
 
 此方程被称为状态更新方程（state update equation）。于是，状态更新方程可描述为
 
@@ -88,7 +81,7 @@ $
 由于仅依赖状态外推方程并不能得到准确的$hat(x)$，此时还需要位置和速度的状态更新方程，分别对$hat(x)$和$hat(dot(x))$进行校正，即
 
 $
-       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1))               \
+       hat(x)_(k) & = hat(x)_(k|k-1) + α (z_(k) - hat(x)_(k|k-1)) \
   hat(dot(x))_(k) & = hat(dot(x))_(k-1) + β (frac(z_(k) - hat(x)_(k|k-1), Δ t))
 $
 
