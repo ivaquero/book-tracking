@@ -3,6 +3,6 @@
 #import "@preview/rexllent:0.4.0": xlsx-parser
 #import "@preview/physica:0.9.7": *
 #import "@preview/fletcher:0.5.8": diagram, edge, node
-#import "@preview/mannot:0.3.0": *
+#import "@preview/mannot:0.3.1": *
 
 #let info = toml("info.toml").global
