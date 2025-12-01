@@ -3,7 +3,6 @@
   title: "拉格朗日插值在羊群追踪中的应用",
   subtitle: "目标跟踪系列课程第1讲",
   info: slide,
-  lang: "zh",
 )
 
 = 背景介绍
