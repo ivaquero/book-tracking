@@ -38,7 +38,10 @@
   $ y = a_0 + a_1x + a_2x^2 + a_3x^3 + a_4x^4 $
 
   其中，$a_0, a_1, a_2, a_3, a_4$ 是待定系数。
-  #figure(image("img/interp-lagrange-5.png", width: 90%), caption: none)
+  #figure(
+    image("img/interp-lagrange-5.png", width: 90%),
+    caption: none,
+  )
 ])
 
 #tip(title: text("辅助软件", fill: black))[
@@ -220,7 +223,10 @@ $
   + 代入数据点横坐标$x_i$，计算各基函数权重$l_j$
   + 代入数据点纵坐标$y_i$，计算插值多项式
 
-  #figure(image("img/interp-lagrange-5yy.png", width: 100%), caption: none)
+  #figure(
+    image("img/interp-lagrange-5yy.png", width: 100%),
+    caption: none,
+  )
 ])
 
 == 主要意义
@@ -236,5 +242,8 @@ $
   - 常见问题与解决方案
   \
 
-  #figure(image("img/py.png", width: 90%), caption: none)
+  #figure(
+    image("img/py.png", width: 90%),
+    caption: none,
+  )
 ])

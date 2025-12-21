@@ -18,13 +18,19 @@
 
 CA 模型能够无滞后地跟踪机动，但代价是在稳态行为期间输出噪声非常大。产生噪声输出的原因是滤波无法区分操纵的开始和信号中的噪声。信号中的噪声意味着加速度，因此滤波的加速度项会跟踪它。CV 滤波无法在目标加速时迅速做出反应，而 CA 滤波却会将零加速状态下的噪声误解为加速度而非噪声。
 
-#figure(image("images/adkf-ca.png", width: 40%), caption: "KF - CA")
+#figure(
+  image("images/adkf-ca.png", width: 40%),
+  caption: "KF - CA",
+)
 
 == 识别机动
 
 一般来说，若物体的行为与 KF 使用的过程模型不同，我们就可以说该物体在 KF 方面发生了机动。对于滤波来说，机动物体的数学后果是什么？物体的行为与滤波的预测不同，因此残差会很大。
 
-#figure(image("images/adaptive-residual.png", width: 50%), caption: "残差图")
+#figure(
+  image("images/adaptive-residual.png", width: 50%),
+  caption: "残差图",
+)
 
 左图显示的是量测与 KF 最终输出之间的差异，而右图显示的是量测与过程模型预测之间的差异。这似乎是一个微妙的区别，但从图中可以看出并非如此。左图中机动开始时的偏差量很小，但右图中的偏差却说明了不同的情况。若被跟踪物体是按照过程模型运动的，那么残差图应该在 0.0 左右跳动。简单说，就是
 
@@ -48,13 +54,19 @@ $ ϵ = 𝒚^⊤𝑺^(-1)𝒚 ≈ 𝒚^2 / 𝑺 $
 
 $ 𝑺 = 𝑯 𝑷 𝑯^⊤ + 𝑹 $
 
-#figure(image("images/adkf-residual.png", width: 40%), caption: "新息")
+#figure(
+  image("images/adkf-residual.png", width: 40%),
+  caption: "新息",
+)
 
 上图图可以清楚地显示新息归一化的效果。对新息进行平方处理可确保信号始终大于$0$，而用了量测协方差对信号进行归一化处理，则可使我们区分新息相对于了量测噪声发生明显变化的时间。机动从$t = 3$秒开始，可以看到$ϵ$开始迅速增加。一旦$ϵ$超过某个极限，我们就需要将$𝑸$按比例放大，而一旦它再次低于该极限，我们又要将$𝑸$按比例缩小。
 
 一般来说，一旦$𝒚> 3σ$左右，我们就可以认为差异是由于实际变化而非噪声造成的。然而，传感器很少是真正的 Gaussian，因此在实际应用中会使用更大的数字，如$5σ~6σ$。
 
-#figure(image("images/adkf-e.png", width: 40%), caption: "ϵ = 4")
+#figure(
+  image("images/adkf-e.png", width: 40%),
+  caption: "ϵ = 4",
+)
 
 另一种非常相似的方法来自 Zarchan @zarchanProgressAstronauticsAeronautics2005a，它根据量测误差协方差的标准差设定限值，公式为
 
@@ -89,7 +101,10 @@ $ tilde(𝑷) = α^2 𝑭 𝑷 𝑭^⊤ + 𝑸 $
   这里，若使用$α$，则我们计算的是$tilde(𝑷)$，而非$macron(𝑷)$。
 ]
 
-#figure(image("images/adkf-alpha.png", width: 40%), caption: "α")
+#figure(
+  image("images/adkf-alpha.png", width: 40%),
+  caption: "α",
+)
 
 
 - 图 1 显示了 KF 的性能。滤波在机动开始时发散，直到 10 秒左右才重获信号。

@@ -94,7 +94,10 @@ $
 
 此即是 α-β 滤波，又称 g-h 滤波。
 
-#figure(image("images/gh-cv.png", width: 70%), caption: "匀速模型")
+#figure(
+  image("images/gh-cv.png", width: 70%),
+  caption: "匀速模型",
+)
 
 == 噪声与增益
 

@@ -31,7 +31,10 @@ $ 𝑸_a = dmat(delim: "[", 0, 0, 1) σ_a^2 $
 
 由下图，过程噪声越大，滤波更相信量测而越忽略估计，反之则更易相信预测。当面对现实中过多的难以消除的噪声时，我们将不得不让$𝑸$大一些。
 
-#figure(image("images/kalman-q.png", width: 50%), caption: "Q 的变化")
+#figure(
+  image("images/kalman-q.png", width: 50%),
+  caption: "Q 的变化",
+)
 
 === 分段噪声
 
@@ -92,7 +95,10 @@ $
 
 当$𝑹$变大，$𝑲$将随之变小，意味着我们更多地采纳了预测。此时，$𝑷$的迹将变大，呈现的椭圆将变宽，意味着$x$轴和$y$轴间有很大相关性。
 
-#figure(image("images/kalman-r.png", width: 60%), caption: "R 的变化")
+#figure(
+  image("images/kalman-r.png", width: 60%),
+  caption: "R 的变化",
+)
 
 #tip[
   Kalman 滤波中的相关，特指线性相关。

@@ -125,7 +125,10 @@ $ B_2 / m = 0.0039 + frac(0.0058, 1 + exp[(v - 35) \/ 5]) $
 
 我们可以将 $"accel"∗∆t$ 纳入速度更新方程。我们应该减去这个分量，因为阻力会降低速度。由此可得到两种情况下的抛物线。
 
-#figure(image("images/trk-parabola.png", width: 40%), caption: "抛物运动")
+#figure(
+  image("images/trk-parabola.png", width: 40%),
+  caption: "抛物运动",
+)
 
 当加速度不够大，即非线性不够强时，可适当增加过程噪声，来避免使用非线性 KF。
 
@@ -155,7 +158,10 @@ $
   mat(delim: "[", x; dot(x); y)
 $
 
-#figure(image("images/radar.png", width: 40%), caption: "雷达示意图")
+#figure(
+  image("images/radar.png", width: 40%),
+  caption: "雷达示意图",
+)
 
 === EFK
 
@@ -263,7 +269,10 @@ $ 𝑹 = [σ^2_("range")] $
 
 近似地讲，汽车在向前行驶时通过转动前轮胎来转向。汽车前部沿着车轮指向的方向移动，同时绕后轮胎转动。这种简单的描述因摩擦导致的滑动、橡胶轮胎在不同速度下的不同行为以及外侧轮胎与内侧轮胎的行驶半径不同等问题而变得复杂。对转向进行精确建模需要一组复杂的微分方程。对于 KF，尤其是低速机器人应用，人们发现一个更简单的自行车模型性能良好。
 
-#figure(image("images/model-bicycle.png", width: 40%), caption: "自行车模型")
+#figure(
+  image("images/model-bicycle.png", width: 40%),
+  caption: "自行车模型",
+)
 
 这里可以看到前轮胎相对于轴距指向$α$方向。在很短的时间内，汽车向前行驶，后轮最终更靠前并略微向内转动，如蓝色阴影轮胎所示。在如此短的时间内，我们可以将其近似为绕半径$R$转弯。转动角为
 
@@ -355,7 +364,10 @@ $
   macron(θ) = "atan"2 (frac(sum_(i=1)^n sin θ_i, n), frac(sum_(i=1)^n cos θ_i, n))
 $
 
-#figure(image("images/model-robot.png", width: 40%), caption: "转弯机器人")
+#figure(
+  image("images/model-robot.png", width: 40%),
+  caption: "转弯机器人",
+)
 
 = 辅助知识
 

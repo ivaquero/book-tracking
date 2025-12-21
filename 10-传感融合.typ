@@ -37,7 +37,10 @@
   $
 ]
 
-#figure(image("images/fusion-radar.png", width: 40%), caption: "两站雷达融合")
+#figure(
+  image("images/fusion-radar.png", width: 40%),
+  caption: "两站雷达融合",
+)
 
 = 常用策略
 

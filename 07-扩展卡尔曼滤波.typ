@@ -23,7 +23,10 @@ $
 
 其中，$n_x$是状态向量$𝑿_k$的维数，$𝒆_i$是第$i$个正交基向量，$𝒇_(i)$为$𝒇$的第$i$个分量，$A_k$是高阶无穷小。
 
-#figure(image("images/efk-linearization.png", width: 40%), caption: "线性化")
+#figure(
+  image("images/efk-linearization.png", width: 40%),
+  caption: "线性化",
+)
 
 由此，$𝒇$的 Jacobian 矩阵为
 

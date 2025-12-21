@@ -233,7 +233,10 @@
 = 航迹跟踪
 <航迹跟踪>
 
-#figure(image("docs/fus-4-track.drawio.png", width: 60%), caption: "航迹跟踪")
+#figure(
+  image("docs/fus-4-track.drawio.png", width: 60%),
+  caption: "航迹跟踪",
+)
 
 === 跟踪数据更新
 
@@ -260,7 +263,10 @@
 = 航迹滤波
 <航迹滤波>
 
-#figure(image("docs/fus-5-filter.drawio.png", width: 90%), caption: "航迹滤波")
+#figure(
+  image("docs/fus-5-filter.drawio.png", width: 90%),
+  caption: "航迹滤波",
+)
 
 == 滤波预测
 
@@ -307,7 +313,10 @@
 = 波束调度
 <波束调度>
 
-#figure(image("docs/fus-6-beam.drawio.png", width: 90%), caption: "波束调度")
+#figure(
+  image("docs/fus-6-beam.drawio.png", width: 90%),
+  caption: "波束调度",
+)
 
 = 模拟目标处理
 <模拟目标处理>

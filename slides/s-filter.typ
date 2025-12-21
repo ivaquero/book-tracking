@@ -86,7 +86,10 @@ $
 
 此即是 α-β 滤波，又称 g-h 滤波。
 
-#figure(image("../images/gh-cv.png", width: 65%), caption: "α-β 滤波")
+#figure(
+  image("../images/gh-cv.png", width: 65%),
+  caption: "α-β 滤波",
+)
 
 == 增益的影响
 
