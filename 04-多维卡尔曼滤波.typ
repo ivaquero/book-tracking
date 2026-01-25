@@ -42,7 +42,6 @@ Kalman 滤波将量测、当前状态估计和预测均视为服从 Gaussian 分
     edge(B, C, "--"),
     edge(A, D, "->", text($y$, size: 0.8em), label-pos: 0.9),
     node(BC, text($tilde(𝒙) = 𝒙 - hat(𝒙)$, size: 0.8em)),
-    // node(AD, stroke: 1pt, width: 0.8em, height: 0.8em, shape: rect),
   ),
   caption: "射影的几何意义",
 )
@@ -61,7 +60,6 @@ Kalman 滤波将量测、当前状态估计和预测均视为服从 Gaussian 分
     edge(B, C, "--"),
     edge(A, D, "->", text($y$, size: lsize), label-pos: 0.9),
     node(BC, text($tilde(𝒛)_(k) = 𝒛_(k) - hat(𝒛)_(k|k-1)$, size: 0.8em)),
-    // node(AD, stroke: 1pt, width: 0.8em, height: 0.8em, shape: rect),
   ),
   caption: "新息的几何意义",
 )
