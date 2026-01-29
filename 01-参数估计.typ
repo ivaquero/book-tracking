@@ -147,8 +147,8 @@ $ 𝒙_("MLE") & = arg max_𝒙 log p(𝒁|𝒙) = arg max_𝒙 med sum_(i=1)^N 
 考虑 Gaussian 分布的 PDF，代入似然函数，有
 
 $
-  ℒ(𝒙) = log p(𝒁|𝒙) & = sum_(i=1)^N log frac(1, sqrt(2π)σ) exp(-(z_i - μ)^2 / (2σ^2)) \
-                    & = sum_(i=1)^N [log frac(1, sqrt(2π)) - log σ - frac(1, 2σ^2)(z_i - μ)^2]
+  ℒ(𝒙) = log p(𝒁|𝒙) & = sum_(i=1)^N log frac(1, sqrt(2pi)σ) exp(-(z_i - μ)^2 / (2σ^2)) \
+                    & = sum_(i=1)^N [log frac(1, sqrt(2pi)) - log σ - frac(1, 2σ^2)(z_i - μ)^2]
 $
 
 对$μ$的极值，有

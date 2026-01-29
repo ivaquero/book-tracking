@@ -81,13 +81,13 @@ $ w_j = frac(1, l′(x_j)) $
 $
   l_i (x) & = frac(l(x), l′(x_i)(x - x_j)) \
           & = l(x) "Res"(frac(1, l(t)(x - t)); t = x_i) \
-          & = frac(1, 2π i) ∫_(Γ_j) frac(1, l(t)(x - t)) dd(t)
+          & = frac(1, 2pi i) ∫_(Γ_j) frac(1, l(t)(x - t)) dd(t)
 $
 
 其中，$Γ_j$为只包围节点$x_j$的正向闭合曲线。进而有
 
 $
-  p(x) = frac(1, 2π i) ∫_(Γ′_j) underbrace(frac(l(x), l(t)(x - t)), #ctext("节点的积分")) underbrace(frac(f(t), (1)), #ctext("节点的函数值")) dd(t)
+  p(x) = frac(1, 2pi i) ∫_(Γ′_j) underbrace(frac(l(x), l(t)(x - t)), #ctext("节点的积分")) underbrace(frac(f(t), (1)), #ctext("节点的函数值")) dd(t)
 $
 
 其中，$Γ′$为只包围了节点$x_0, x_1, ⋯ , x_n$的正向闭合曲线。又
@@ -97,7 +97,7 @@ $ "Res"(frac(l(x) f(t), l(t)(x - t)); t = x) = - f(x) $
 于是可得，Hermite 积分公式
 
 $
-  f(x) - p(x) = frac(1, 2π i) ∫_(Γ_j) frac(l(x)f(t), l(t)(t - x)) dd(t)
+  f(x) - p(x) = frac(1, 2pi i) ∫_(Γ_j) frac(l(x)f(t), l(t)(t - x)) dd(t)
 $ <hermite_int>
 
 这里的$Γ$在$Γ′$的基础上，还包括了待估计点$x$。其告诉我们，$f(x)$的解析区域越大，插值收敛越快。
