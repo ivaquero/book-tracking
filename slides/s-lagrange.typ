@@ -150,7 +150,7 @@ $
 将5个拉格朗日基与数据点相乘，得到插值多项式，即
 
 $
-  p(x) = sum_(j = 0)^n y_j l_j (x), quad l_j (x) = (∏_(k = 0, k ≠ j)^n (x - x_k)) / (∏_(k = 0, k ≠ j)^n (x_j - x_k))
+  p(x) = sum_(j = 0)^n y_j l_j (x), quad l_j (x) = (product_(k = 0, k ≠ j)^n (x - x_k)) / (product_(k = 0, k ≠ j)^n (x_j - x_k))
 $
 
 其中，$y_j$ 是数据点的纵坐标。而 $l_j (x)$ 是拉格朗日基，即
@@ -183,7 +183,7 @@ Lagrange 插值基本公式有 2 个缺点
 这里引入节点函数
 
 $
-  l(x) = ∏_(i=0)^n (x - x_i) = ∏_(i=0,i≠j)^n (x - x_i) ⋅ (x - x_j)
+  l(x) = product_(i=0)^n (x - x_i) = product_(i=0,i≠j)^n (x - x_i) ⋅ (x - x_j)
 $ <node>
 
 又，此前的约束条件为
@@ -209,7 +209,7 @@ $
 此公式被称为质心公式（barycentic formula）。其中，$w_j$不再随$x$变化，只算一次即可。即
 
 $
-  w_j = frac(1, ∏_(k=0,k≠j)^n (x_j - x_k))
+  w_j = frac(1, product_(k=0,k≠j)^n (x_j - x_k))
 $
 
 = 课程小结

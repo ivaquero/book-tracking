@@ -16,7 +16,7 @@ $
 也就是令$ℓ_i$在$x_i$处为$1$，其余为$0$。可以归纳出，$n$次 Lagrange 基函数$ℓ_i$为
 
 $
-  ℓ_i (x) = ∏_(i=0,i≠j)^n frac(x - x_i, x_i - x_j) = frac((x - x_0) ⋯ (x - x_(j-1))(x - x_(j+1)) ⋯ (x - x_n), (x_i - x_0) ⋯ (x_i - x_(j-1))(x_i - x_(j+1)) ⋯ (x_i - x_n))
+  ℓ_i (x) = product_(i=0,i≠j)^n frac(x - x_i, x_i - x_j) = frac((x - x_0) ⋯ (x - x_(j-1))(x - x_(j+1)) ⋯ (x - x_n), (x_i - x_0) ⋯ (x_i - x_(j-1))(x_i - x_(j+1)) ⋯ (x_i - x_n))
 $
 
 同时满足
@@ -35,7 +35,7 @@ Lagrange 插值基本公式有 2 个缺点
 这里引入节点函数
 
 $
-  l(x) = ∏_(i=0)^n (x - x_i) = ∏_(i=0,i≠j)^n (x - x_i) ⋅ (x - x_j)
+  l(x) = product_(i=0)^n (x - x_i) = product_(i=0,i≠j)^n (x - x_i) ⋅ (x - x_j)
 $ <lag_node>
 
 联合@lag_sum 和@lag_node，可得
@@ -53,7 +53,7 @@ $
 此公式被称为质心公式（barycentic formula）。其中，$w_j$不再随$x$变化，只算一次即可。即
 
 $
-  w_j = frac(1, ∏_(k=0,k≠j)^n (x_j - x_k))
+  w_j = frac(1, product_(k=0,k≠j)^n (x_j - x_k))
 $
 
 === 误差分析
@@ -151,11 +151,11 @@ $
 
 = 辅助定理
 
-#theorem(title: "Weierstrass 逼近定理")[
+#theorem(title: ctext("Weierstrass 逼近定理"))[
   $[a, b]$上的任何连续函数都可以通过有限次多项式逼近。
 ]
 
-#theorem(title: "留数定理")[
+#theorem(title: ctext("留数定理"))[
   $
     "Res"(frac(1, g(x)); x_0) = frac(1, g′(x_0))
   $
