@@ -50,35 +50,38 @@
 
 == Vandermonde 矩阵
 
-将给定的5个点代入上式，得到一个方程组，将其表示为一个矩阵，即 Vandermonde 矩阵。
-
-#set math.equation(numbering: none)
 #let lagrange = csv("img/lagrange.csv")
 
-#figure(
-  tableq(lagrange, 6),
-  // caption: "5个点的坐标",
-  supplement: [表],
-  kind: table,
-)
+#[
+  #set text(size: 18pt)
+  将给定的5个点代入上式，得到一个方程组，将其表示为一个矩阵，即 Vandermonde 矩阵。
 
-$
-  mat(
-    delim: "[", -1.0; 1.0; -0.5;
-    0.0; 1.5
-  ) = mat(
-    delim: "[",
-    1, - 3, (-3)^2, (-3)^3, (-3)^4;
-    1, - 2, (-2)^2, (-2)^3, (-2)^4;
-    1, 0, 0^2, 0^3, 0^4;
-    1, 1, 1^2, 1^3, 1^4;
-    1, 3, 3^2, 3^3, 3^4
+  #set math.equation(numbering: none)
+  #figure(
+    tableq(lagrange, 6),
+    // caption: "5个点的坐标",
+    supplement: [表],
+    kind: table,
   )
-  mat(delim: "[", a_0; a_1; a_2; a_3; a_4)
-$
 
-#warning(title: text("注意", fill: black))[
-  当数据点增多时，Vandermonde 矩阵的行列式会变得非常大，计算量也会增加。
+  $
+    mat(
+      delim: "[", -1.0; 1.0; -0.5;
+      0.0; 1.5
+    ) = mat(
+      delim: "[",
+      1, - 3, (-3)^2, (-3)^3, (-3)^4;
+      1, - 2, (-2)^2, (-2)^3, (-2)^4;
+      1, 0, 0^2, 0^3, 0^4;
+      1, 1, 1^2, 1^3, 1^4;
+      1, 3, 3^2, 3^3, 3^4
+    )
+    mat(delim: "[", a_0; a_1; a_2; a_3; a_4)
+  $
+
+  #warning(title: ctext("注意"))[
+    当数据点增多时，Vandermonde 矩阵的行列式会变得非常大，计算量也会增加。
+  ]
 ]
 
 = 拉格朗日插值

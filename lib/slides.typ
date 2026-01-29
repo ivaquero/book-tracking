@@ -3,3 +3,5 @@
 #import "@preview/touying-quick:0.3.0": *
 
 #let slide = toml("info.toml").slide
+
+#let ctext(body) = text(body, font: default-styles.fonts.at("zh").math)
