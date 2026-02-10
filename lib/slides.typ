@@ -1,7 +1,5 @@
 #import "@preview/subpar:0.2.2": grid as sgrid
 #import "@preview/mannot:0.3.1": *
-#import "@preview/touying-quick:0.3.0": *
+#import "@preview/touying-quick:0.4.0": *
 
 #let slide = toml("info.toml").slide
-
-#let ctext(body) = text(body, font: default-styles.fonts.at("zh").math)
