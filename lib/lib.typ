@@ -7,3 +7,4 @@
 #import "@preview/touying-quick:0.4.1": *
 
 #let info = toml("info.toml").global
+#let slide = toml("info.toml").slide
