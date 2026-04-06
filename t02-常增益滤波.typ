@@ -1,4 +1,4 @@
-#import "../lib/slides.typ": *
+#import "lib/lib.typ": *
 #show: touying-quick.with(
   title: "常增益滤波",
   subtitle: "Kalman 滤波系列课程第1讲",
@@ -87,7 +87,7 @@ $
 此即是 α-β 滤波，又称 g-h 滤波。
 
 #figure(
-  image("../images/gh-cv.png", width: 65%),
+  image("images/gh-cv.png", width: 65%),
   caption: "α-β 滤波",
 )
 
@@ -96,8 +96,8 @@ $
 #align(center, stack(
   dir: ltr,
   spacing: 2em,
-  figure(image("../images/gh-g.png", width: 50%), caption: "变化的 α（g）"),
-  figure(image("../images/gh-h.png", width: 50%), caption: "变化的 β（h）"),
+  figure(image("images/gh-g.png", width: 50%), caption: "变化的 α（g）"),
+  figure(image("images/gh-h.png", width: 50%), caption: "变化的 β（h）"),
 ))
 
 由上不难看出，$α$控制着滤波的精度，$β$控制着滤波响应时间，后者与雷达精度呈正相关。
@@ -112,7 +112,7 @@ $
     σ_x = frac(1, 1 / σ_1^2 + 1 / σ_2^2) $
   ],
   #figure(
-    image("../images/gaussian-prod.png", width: 100%),
+    image("images/gaussian-prod.png", width: 100%),
     caption: "Gaussian 分布的积",
   )
 ])
@@ -143,7 +143,7 @@ $
       - 估计：$hat(x)_k$
       - 估计方差：$p_k$
 
-  #image("img/kalman.drawio.png", width: 160%)
+  #image("data/kalman.drawio.png", width: 160%)
 ])
 
 == 后续
@@ -153,5 +153,5 @@ $
   - Kalman 滤波代码实现
   链接: https://ivaquero.github.io/blog-filters
 
-  #image("img/tut.png", height: 125%, width: 100%)
+  #image("data/tut.png", height: 125%, width: 100%)
 ])
