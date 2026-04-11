@@ -98,7 +98,6 @@ $
     ],
   ),
   caption: "LKF vs. EKF",
-  kind: table,
 )
 
 = 常用形式

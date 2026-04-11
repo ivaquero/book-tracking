@@ -319,7 +319,6 @@ $
     ],
   ),
   caption: "Kalman 滤波的两种形式",
-  kind: table,
 )
 
 = 辅助知识
