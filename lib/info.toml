@@ -1,12 +1,12 @@
 [global]
-    title = ""
-    footer = "Yāng Xīnbīn"
-    header = "目标追踪"
-    lang = "zh"
+title = ""
+footer = "Yāng Xīnbīn"
+header = "目标追踪"
+lang = "zh"
 
 [slide]
-    author = "主讲：杨鑫斌"
-    institution = "人工智能学院"
-    footer = "Kalman 滤波系列课程"
-    lang = "zh"
-    ending = "感谢大家聆听"
+author = "主讲：杨鑫斌"
+institution = "人工智能学院"
+footer = "Kalman 滤波系列课程"
+lang = "zh"
+ending = "感谢大家聆听"
