@@ -37,15 +37,14 @@ $
   & = (k-1) / k markhl(1 / (k-1) sum_(i=1)^(k-1) z_(i), fill: #rgb(0, 180, 255, 50), tag: #<stats>) + 1 / k z_(k) \
   & = (k-1) / k markhl(hat(x)_(k|k-1), fill: #rgb(150, 90, 170, 50), tag: #<cond>) + 1 / k z_(k) \
   & = hat(x)_(k|k-1) + 1 / k (z_(k) - hat(x)_(k|k-1))
-  #annot(<stats>)[#text("统计形式", font: "Kaiti SC")]
-  #annot(<cond>)[#text("条件形式", font: "Kaiti SC")]
+  #annot(<stats>)[#ctext("统计形式")]
+  #annot(<cond>)[#ctext("条件形式")]
 $
 
 此方程被称为状态更新方程（state update equation）。于是，状态更新方程可描述为
 
-#align(center, text(
+#align(center, ctext(
   "当前估计 = 预测 + 增益 × 新息",
-  font: "Kaiti SC",
   size: 20pt,
 ))
 
@@ -104,25 +103,27 @@ $
 
 == α-β 滤波
 
-#block(height: 16em, columns()[
+#columns()[
   #theorem[
     设$X_1 ∼ 𝒩(μ_1, σ_1^2), X_2 ∼ 𝒩(μ_2, σ_2^2)$，且$X_1$和$X_2$相互独立，则 Gaussian 积分布的参数为
 
     $ μ_x = frac(σ_1^2 μ_2 + σ_2^1 μ_1, σ_1^2 + σ_2^2)\
     σ_x = frac(1, 1 / σ_1^2 + 1 / σ_2^2) $
   ],
+  #colbreak()
   #figure(
     image("images/gaussian-prod.png", width: 100%),
     caption: "Gaussian 分布的积",
   )
-])
+]
 
 = 课程小结
 
 == Kalman 滤波流程
 
 #set list(indent: -1.2em)
-#block(height: 15em, width: 90%, columns(3)[
+#columns(3)[
+  #set text(size: 18pt)
   - 初始化
     + 获取
       - 初始估计状态：$hat(x)_0$
@@ -132,7 +133,7 @@ $
     + 状态预测
       - 预测：$hat(x)_(k|k-1)$
       - 预测方差：$p_(k|k-1)$
-
+  #colbreak()
   - 状态更新
     + 获取
       - 量测及其方差：$z_k$
@@ -142,16 +143,20 @@ $
     + 状态预测
       - 估计：$hat(x)_k$
       - 估计方差：$p_k$
+  #colbreak()
 
-  #image("data/kalman.drawio.png", width: 160%)
-])
+  #figure(
+    image("data/kalman.drawio.png", width: 150%),
+    caption: none,
+  )
+]
 
 == 后续
 
-#block(height: 9em, columns(gutter: .1em)[
+#columns(gutter: .1em)[
   - Kalman 滤波的多维推广
   - Kalman 滤波代码实现
   链接: https://ivaquero.github.io/blog-filters
-
-  #image("data/tut.png", height: 125%, width: 100%)
-])
+  #colbreak()
+  #image("data/tut.png", width: 100%)
+]

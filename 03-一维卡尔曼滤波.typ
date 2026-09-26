@@ -115,16 +115,17 @@ $
 
 == 状态更新
 
-#block(height: 9em, columns()[
+#columns()[
   - 输入
     - 量测：$z_k$
     - 量测方差：$r_k$
     - 预测：$hat(x)_(k|k-1)$
     - 预测方差：$p_(k|k-1)$
+  #colbreak()
   - 输出
     - 估计：$hat(x)$
     - 估计方差：$p_k$
-])
+]
 
 == 状态预测
 
