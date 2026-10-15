@@ -21,16 +21,11 @@ __pycache__/
 
 # custom
 .workbuddy
+.probe
 .tmp
 articles
 images
+
 *.bkp
 *.pdf
 test.*
-.probe/apply.py
-.probe/blocks.json
-.probe/cuts.json
-.probe/geo_slide.typ
-.probe/measure_splits.py
-.probe/splits.json
-.probe/unwrap.py
