@@ -79,9 +79,11 @@ $
 上述方程被称为状态外推方程（state extrapolation equation）或预测方程。又由于动态（时变）过程必然带来噪声，即过程噪声（process noise）。引入过程噪声后，上述两式表示为
 
 $
-       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) \
-  hat(dot(x))_(k) & = hat(dot(x))_(k-1)
+       hat(x)_(k) & = hat(x)_(k-1) + Δ t hat(dot(x))_(k-1) + 1 / 2 Δ t^2 w_k \
+  hat(dot(x))_(k) & = hat(dot(x))_(k-1) + Δ t w_k
 $
+
+其中$w_k$为均值为$0$、方差为$q_k$的白噪声（离散白噪声加速度模型），用于刻画模型不确定性——例如目标小幅机动未被显式建模的部分。
 
 == α-β 滤波
 

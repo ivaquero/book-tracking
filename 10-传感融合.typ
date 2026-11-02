@@ -1,6 +1,6 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(title: "传感融合", info: info)
 #import "@preview/consketcher:0.2.0": *
+#show: chapter-style.with(title: "传感融合", info: info)
 
 = 铺垫
 
